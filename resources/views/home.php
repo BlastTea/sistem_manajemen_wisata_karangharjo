@@ -2,14 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <?php include 'components/head.php' ?>
+    <link rel="stylesheet" href="<?= $_ENV['APP_URL'] . '/css/home.css' ?>">
 </head>
 
 <body>
-    <h1>Welcome to the Home Page</h1>
-    <a href="index.php?page=about">Go to About Page</a>
+    <img class="home_landscape" src="<?= $_ENV['APP_URL'] . '/storage/images/home_landscape.jpg' ?>" alt="Home landscape">
 </body>
 
 </html>
