@@ -78,14 +78,26 @@ class Route
                     };
                 }, function () use ($action, $request) {
                     if (is_callable($action)) {
-                        return call_user_func($action, $request);
+                        $result = call_user_func($action, $request);
+                        
+                        if ($result instanceof \App\Providers\Response) {
+                            return $result->send();
+                        }
+
+                        return $result;
                     }
 
                     if (str_contains($action, '@')) {
                         list($controllerName, $method) = explode('@', $action);
                         $controllerClass = "App\\Http\\Controllers\\$controllerName";
                         $controller = new $controllerClass();
-                        return $controller->$method($request);
+                        $result = $controller->$method($request);
+
+                        if ($result instanceof \App\Providers\Response) {
+                            return $result->send();
+                        }
+
+                        return $result;
                     }
 
                     $viewPath = __DIR__ . "/../../resources/views/{$action}.php";

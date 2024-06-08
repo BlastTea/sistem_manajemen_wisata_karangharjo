@@ -20,6 +20,51 @@ abstract class Model
         return new QueryBuilder(self::$connection, static::$table);
     }
 
+    public function hasOne($related, $foreignKey = null, $localKey = 'id')
+    {
+        $relatedInstance = new $related;
+        $foreignKey = $foreignKey ?: $this->getForeignKey();
+        return $relatedInstance::query()->where($foreignKey, $this->{$localKey});
+    }
+
+    public function hasMany($related, $foreignKey = null, $localKey = 'id')
+    {
+        $relatedInstance = new $related;
+        $foreignKey = $foreignKey ?: $this->getForeignKey();
+        return $relatedInstance::query()->where($foreignKey, $this->{$localKey});
+    }
+
+    public function belongsTo($related, $foreignKey = null, $ownerKey = 'id')
+    {
+        $relatedInstance = new $related;
+        $foreignKey = $foreignKey ?: $this->getForeignKey();
+        return $relatedInstance::query()->where($ownerKey, $this->{$foreignKey});
+    }
+
+    public function belongsToMany($related, $table = null, $foreignPivotKey = null, $relatedPivotKey = null, $parentKey = 'id', $relatedKey = 'id')
+    {
+        $relatedInstance = new $related;
+        $table = $table ?: $this->getJoinTable($related);
+        $foreignPivotKey = $foreignPivotKey ?: $this->getForeignKey();
+        $relatedPivotKey = $relatedPivotKey ?: $relatedInstance->getForeignKey();
+
+        return $relatedInstance::query()->select($relatedInstance::$table . '.*')
+            ->join($table, $table . '.' . $relatedPivotKey, '=', $relatedInstance::$table . '.' . $relatedKey)
+            ->where($table . '.' . $foreignPivotKey, $this->{$parentKey});
+    }
+
+    protected function getForeignKey()
+    {
+        return strtolower(static::class) . '_id';
+    }
+
+    protected function getJoinTable($related)
+    {
+        $models = [strtolower(static::class), strtolower($related)];
+        sort($models);
+        return implode('_', $models);
+    }
+
     public static function where($column, $operator, $value)
     {
         return static::query()->where($column, $operator, $value);
@@ -53,23 +98,33 @@ abstract class Model
     {
         $keys = array_keys($this->attributes);
         $values = array_values($this->attributes);
+        $now = date('Y-m-d H:i:s');
 
-        if (isset($this->id)) {
-            // Update
-            $setPart = implode(', ', array_map(fn ($key) => "$key = ?", $keys));
-            $sql = "UPDATE " . static::$table . " SET $setPart WHERE id = " . $this->id;
+        if (isset($this->attributes['id']) && $this->attributes['id']) {
+            // Update existing record
+            $this->attributes['updated_at'] = $now;
+            $setPart = implode(', ', array_map(function ($key) {
+                return "$key = :$key";
+            }, $keys));
+            $sql = "UPDATE " . static::$table . " SET $setPart WHERE id = :id";
         } else {
-            // Insert
-            $keysPart = implode(', ', $keys);
-            $placeholders = implode(', ', array_fill(0, count($keys), '?'));
-            $sql = "INSERT INTO " . static::$table . " ($keysPart) VALUES ($placeholders)";
+            // Insert new record
+            $this->attributes['created_at'] = $this->attributes['updated_at'] = $now;
+            $keys = array_keys($this->attributes);
+            $placeholders = array_map(function ($key) {
+                return ":$key";
+            }, $keys);
+            $sql = "INSERT INTO " . static::$table . " (" . implode(', ', $keys) . ") VALUES (" . implode(', ', $placeholders) . ")";
         }
 
         $stmt = self::$connection->prepare($sql);
-        $stmt->execute($values);
+        foreach ($this->attributes as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+        $stmt->execute();
 
-        if (!isset($this->id)) {
-            $this->id = self::$connection->lastInsertId();
+        if (!isset($this->attributes['id'])) {
+            $this->attributes['id'] = self::$connection->lastInsertId();
         }
     }
 

@@ -13,8 +13,6 @@ class AuthMiddleware implements Middleware {
         //     exit;
         // }
 
-        echo "Lewat Auth Middleware dulu bro! : " . $request->input('id');
-
         return $next($request);
     }
 }

@@ -2,4 +2,4 @@
 
 use App\Providers\Route;
 
-Route::get('api/user', 'UserController@show', ['auth']);
+Route::post('api/login', 'AuthController@login');
