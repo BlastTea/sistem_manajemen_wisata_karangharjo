@@ -5,10 +5,10 @@ namespace App\Providers;
 class Response {
     protected $headers = [];
     protected $body;
-    protected $statusCode = 200;
+    protected $status = 200;
 
-    public function setStatusCode($code) {
-        $this->statusCode = $code;
+    public function status($code) {
+        $this->status = $code;
         return $this;
     }
 
@@ -17,9 +17,17 @@ class Response {
         return $this;
     }
 
-    public function json($data) {
+    public function json($data, $status = 200) {
+        if (is_object($data) && method_exists($data, 'toJson')) {
+            $data = $data->toJson();
+        } else if (is_object($data) && method_exists($data, 'toArray')) {
+            $data = json_encode($data->toArray());
+        } else {
+            $data = json_encode($data);
+        }
         $this->header('Content-Type', 'application/json');
-        $this->body = json_encode($data);
+        $this->body = $data;
+        $this->status = $status;
         return $this;
     }
 
@@ -29,7 +37,7 @@ class Response {
                 header("$key: $value");
             }
         }
-        http_response_code($this->statusCode);
+        http_response_code($this->status);
         echo $this->body;
     }
 }

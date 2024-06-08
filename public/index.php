@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../vendor/load_env.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Models\Model;
+use App\Providers\Model;
 
 $pdo = new PDO($_ENV['DB_CONNECTION'] . ':host=' . $_ENV['DB_HOST'] . ';port=' . $_ENV['DB_PORT'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
 Model::setConnection($pdo);

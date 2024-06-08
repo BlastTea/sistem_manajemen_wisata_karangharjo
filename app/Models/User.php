@@ -2,6 +2,24 @@
 
 namespace App\Models;
 
-class User extends Model {
+use App\Providers\Model;
+
+class User extends Model
+{
     protected static $table = 'users';
+
+    protected $fillable = [
+        'username',
+        'email',
+        'role',
+    ];
+
+    protected $hidden = [
+        'password'
+    ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

@@ -2,9 +2,9 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jun 2024 pada 18.16
--- Versi server: 10.4.32-MariaDB
+-- Host: 185.229.118.101:3306
+-- Waktu pembuatan: 08 Jun 2024 pada 18.14
+-- Versi server: 10.11.6-MariaDB-cll-lve
 -- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bung_karjo`
+-- Database: `u1564007_bumdes_bung_karjo_dev`
 --
 
 -- --------------------------------------------------------
@@ -178,7 +178,7 @@ CREATE TABLE `transaction_details` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
@@ -273,6 +273,7 @@ ALTER TABLE `transaction_details`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_username_unique` (`username`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --

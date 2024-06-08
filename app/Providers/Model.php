@@ -1,23 +1,41 @@
 <?php
 
-namespace App\Models;
+namespace App\Providers;
 
 use PDO;
 
-abstract class Model
+abstract class Model implements \JsonSerializable
 {
     protected static $connection;
     protected static $table = '';
     protected $attributes = [];
+    protected $fillable = [];
+    protected $hidden = [];
+    protected $primaryKey = 'id';
+    protected $timestamps = true;
 
     public static function setConnection($connection)
     {
         self::$connection = $connection;
     }
 
+    public function __construct(array $attributes = [])
+    {
+        $this->fill($attributes);
+    }
+
+    public function fill(array $attributes)
+    {
+        foreach ($attributes as $key => $value) {
+            if (in_array($key, $this->fillable)) {
+                $this->attributes[$key] = $value;
+            }
+        }
+    }
+
     protected static function query()
     {
-        return new QueryBuilder(self::$connection, static::$table);
+        return new QueryBuilder(self::$connection, static::$table, static::class);
     }
 
     public function hasOne($related, $foreignKey = null, $localKey = 'id')
@@ -100,16 +118,18 @@ abstract class Model
         $values = array_values($this->attributes);
         $now = date('Y-m-d H:i:s');
 
-        if (isset($this->attributes['id']) && $this->attributes['id']) {
-            // Update existing record
-            $this->attributes['updated_at'] = $now;
+        if (isset($this->attributes[$this->primaryKey])) {
+            if ($this->timestamps) {
+                $this->attributes['updated_at'] = $now;
+            }
             $setPart = implode(', ', array_map(function ($key) {
                 return "$key = :$key";
             }, $keys));
-            $sql = "UPDATE " . static::$table . " SET $setPart WHERE id = :id";
+            $sql = "UPDATE " . static::$table . " SET $setPart WHERE {$this->primaryKey} = :{$this->primaryKey}";
         } else {
-            // Insert new record
-            $this->attributes['created_at'] = $this->attributes['updated_at'] = $now;
+            if ($this->timestamps) {
+                $this->attributes['created_at'] = $this->attributes['updated_at'] = $now;
+            }
             $keys = array_keys($this->attributes);
             $placeholders = array_map(function ($key) {
                 return ":$key";
@@ -123,10 +143,11 @@ abstract class Model
         }
         $stmt->execute();
 
-        if (!isset($this->attributes['id'])) {
-            $this->attributes['id'] = self::$connection->lastInsertId();
+        if (!isset($this->attributes[$this->primaryKey])) {
+            $this->attributes[$this->primaryKey] = self::$connection->lastInsertId();
         }
     }
+
 
     public function delete()
     {
@@ -136,6 +157,22 @@ abstract class Model
 
         $stmt = self::$connection->prepare("DELETE FROM " . static::$table . " WHERE id = ?");
         $stmt->execute([$this->id]);
+    }
+
+    public function toArray()
+    {
+        $data = array_diff_key($this->attributes, array_flip($this->hidden));
+        return $data;
+    }
+
+    public function toJson()
+    {
+        return json_encode($this->toArray());
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 
     public function __get($name)
