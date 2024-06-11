@@ -11,15 +11,14 @@ for ($i = $start; $i <= $end; $i++) {
 }
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <title>Wisata Desa Karangharjo | Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= $_ENV['APP_URL'] . '/css/app.css' ?>">
+    <link rel="stylesheet" href="<?= $_ENV['APP_URL'] . '/css/homepage.css' ?>">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -95,7 +94,7 @@ for ($i = $start; $i <= $end; $i++) {
                         items: 1
                     }
                 }
-            });
+            });visu
         });
     </script>
 </head>
@@ -112,67 +111,49 @@ for ($i = $start; $i <= $end; $i++) {
                     </svg>
                 </div>
                 <ul tabindex="0"
-                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Item 1</a></li>
-                    <li tabindex="0">
-                        <a class="justify-between">
-                            Parent
-                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <path d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
-                        <ul class="p-2">
-                            <li><a>Submenu 1</a></li>
-                            <li><a>Submenu 2</a></li>
-                        </ul>
-                    </li>
-                    <li><a>Item 3</a></li>
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-medium">
+                    <li><a>Home</a></li>
+                    <li><a>Services</a></li>
+                    <li><a>Ticket</a></li>
+                    <li><a>About Us</a></li>
                 </ul>
             </div>
-            <a class="text-xl btn btn-ghost">daisyUI</a>
+            <a class="text-xl btn btn-ghost">Rumah Pintar</a>
         </div>
         <div class="hidden navbar-end lg:flex">
-            <ul class="px-1 menu menu-horizontal">
-                <li><a>Item 1</a></li>
-                <li tabindex="0">
-                    <details>
-                        <summary>Parent</summary>
-                        <ul class="p-2">
-                            <li><a>Submenu 1</a></li>
-                            <li><a>Submenu 2</a></li>
-                        </ul>
-                    </details>
-                </li>
-                <li><a>Item 3</a></li>
+            <ul class="px-1 menu menu-horizontal font-medium">
+                <li><a>Home</a></li>
+                <li><a>Services</a></li>
+                <li><a>Ticket</a></li>
+                <li><a>About Us</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- Start Content -->
     <section>
-        <div id="main-slider" class="relative z-0 owl-carousel owl-theme">
-            <?= $sliderItems ?>
-        </div>
-
-        <div class="absolute top-0 z-30">
+        <div class="absolute z-30">
             <div class="grid h-screen grid-cols-1 px-3 pt-95 bg-overlay lg:grid-cols-2 md:px-4 lg:px-8">
                 <div class="flex flex-col gap-5 text-white md:gap-8">
-                    <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-4 mt-72">
                         <h2 class="text-xl font-semibold md:text-3xl lg:text-4xl">Selamat Datang di Rumah Pintar
                             Karangharjo, Jember</h2>
                         <p>
-                            Kami dengan senang hati menyambut Anda di Rumah Pintar Karangharjo, destinasi wisata edukasi
-                            yang menawarkan pengalaman unik dan menarik di Jember. Temukan berbagai kegiatan yang
-                            menginspirasi, edukatif, dan menyenangkan bagi seluruh keluarga. Dari pameran interaktif
-                            hingga workshop kreatif, kami memiliki sesuatu untuk semua orang.
+                            Kami dengan senang hati menyambut Anda di Rumah Pintar
+                            Karangharjo, destinasi wisata edukasi yang menawarkan pengalaman unik dan menarik di
+                            Jember.
+                            <span class="hidden lg:block"> Temukan berbagai kegiatan
+                                yang menginspirasi, edukatif, dan menyenangkan bagi seluruh keluarga. Dari pameran
+                                interaktif
+                                hingga workshop kreatif, kami memiliki sesuatu untuk semua orang.</span>
                         </p>
                         <div>
-                            <div class="flex gap-3 mb-10">
+                            <div class="grid grid-cols-1 mt-5 mb-10">
                                 <p><strong class="font-bold">Buka</strong> 08:00 - 17:00</p>
                                 <p><strong class="font-bold">Lokasi:</strong> Desa Karangharjo, Jember</p>
                             </div>
                             <div class="flex gap-3 md:ml-auto">
-                                <a href="single-video.html" class="btn btn-secondary">Lihat Aktivitas <i
+                                <a href="#" class="btn btn-secondary">Lihat Aktivitas <i
                                         class="pl-2 fas fa-play"></i></a>
                                 <button class="btn btn-primary">Pesan Paket <i class="pl-2 fas fa-plus"></i></button>
                                 <button
@@ -186,21 +167,67 @@ for ($i = $start; $i <= $end; $i++) {
 
             </div>
         </div>
-        <!-- End Content -->
-    </section>
-
-
-    <section class="z-50 h-screen bg-blue-500">
-        <div class="container flex items-center justify-center h-full mx-auto">
-            <h1 class="text-4xl text-white">Welcome to Hero Section</h1>
+        <div id="main-slider" class="relative z-0 owl-carousel owl-theme">
+            <?= $sliderItems ?>
         </div>
     </section>
+    <!-- End Content -->
 
-    <section class="h-screen bg-gray-100 content">
-        <div class="container flex items-center justify-center h-full mx-auto">
-            <h2 class="text-2xl text-gray-800">Content Section</h2>
+    <!-- Start Section -->
+    <section class="container mx-auto my-8 h-screen">
+        <div class="text-center mb-8 mt-32">
+            <h1 class="font-bold text-4xl text-green-600">
+                Layanan Rumah Pintar
+            </h1>
+            <p class="text-lg text-gray-500">Mengenal Alam dan Budaya dengan Cara yang Menyenangkan</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5 md:p-10 lg:p-20 text-black">
+            <!-- Card 1 -->
+            <div class="card w-full border border-gray-400 bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <div class="text-6xl text-green-600 mb-4">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h2 class="card-title text-2xl font-semibold">Petualangan Hutan</h2>
+                    <p class="text-gray-600">Ajari anak-anak tentang ekosistem hutan dan keanekaragaman hayati dengan
+                        pengalaman langsung di alam.</p>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card w-full border border-gray-400 bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <div class="text-6xl text-green-600 mb-4">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h2 class="card-title text-2xl font-semibold">Pembelajaran Pertanian</h2>
+                    <p class="text-gray-600">Kenalkan anak-anak pada dunia pertanian dan cara bercocok tanam, dari
+                        menanam biji hingga panen.</p>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card w-full border border-gray-400 bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <div class="text-6xl text-green-600 mb-4">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h2 class="card-title text-2xl font-semibold">Eksplorasi Budaya</h2>
+                    <p class="text-gray-600">Perkenalkan anak-anak pada berbagai budaya dan tradisi melalui aktivitas
+                        interaktif dan edukatif.</p>
+                </div>
+            </div>
         </div>
     </section>
+    <!-- End Section -->
+
+
+    <!-- Start Section -->
+    <!-- End Section -->
+
+    <!-- Start Section -->
+    <!-- End Section -->
+
+    <!-- Include FontAwesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
