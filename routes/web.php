@@ -12,4 +12,7 @@ Route::get('dashboard', 'DashboardController@show', ['auth']);
 
 // Route::get('home', 'home');
 
-Route::get('login', 'LoginController@show');
+Route::get('login', 'AuthController@showLogin');
+
+Route::get('register', 'AuthController@showRegister');
+

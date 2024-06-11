@@ -44,7 +44,7 @@ class AuthController
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()], 422);
         }
-        
+
         $user = new User();
         $user->username = $request->input('username');
         $user->email = $request->input('email');
@@ -53,5 +53,15 @@ class AuthController
         $user->save();
 
         return response()->json(['message' => 'User has been created']);
+    }
+
+    public function showLogin(Request $request)
+    {
+        return view('auth/login');
+    }
+
+    public function showRegister(Request $request)
+    {
+        return view('auth/register');
     }
 }
