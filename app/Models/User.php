@@ -12,6 +12,7 @@ class User extends Model
         'username',
         'email',
         'role',
+        'password'
     ];
 
     protected $hidden = [
@@ -23,3 +24,4 @@ class User extends Model
         return $this->hasMany(Transaction::class);
     }
 }
+?>
