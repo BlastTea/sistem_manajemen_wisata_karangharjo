@@ -105,7 +105,7 @@
                     <li><a>Services</a></li>
                     <li><a>Ticket</a></li>
                     <li><a>About Us</a></li>
-                    <div class="btn btn-info">Masuk</div>
+                    <a href="<?php echo $_ENV['APP_URL'] . '/login' ?>" class="btn btn-info">login</a>
                 </ul>
             </div>
             <a class="text-xl btn btn-ghost">Rumah Pintar</a>
@@ -117,7 +117,7 @@
                 <li><a>Ticket</a></li>
                 <li><a>About Us</a></li>
             </ul>
-            <div class="btn btn-info">Masuk</div>
+            <a href="<?php echo $_ENV['APP_URL'] . '/login' ?>" class="btn btn-info">login</a>
         </div>
     </nav>
 
@@ -165,6 +165,8 @@
 
     <!-- Start services Section -->
     <section class="container mx-auto my-8 h-auto">
+        <p>User Sudah login</p>
+        <p>User belom login</p>
         <div class="text-center mb-8 mt-32">
             <h1 class="font-bold text-4xl text-green-600">
                 Layanan Rumah Pintar
@@ -236,7 +238,7 @@
             <!-- Card 1 -->
             <a href="javascript:void(0)"
                 @click="open = true; paket = 'Paket Agrowisata'; masaBerlaku = '13 Jun 2024'; hargaTiket = 10000">
-                <div class="card card-compact w-full bg-base-100 shadow-xl">
+                <div class="card card-compact w-full h-full bg-base-100 shadow-xl">
                     <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                             alt="Shoes" /></figure>
                     <div class="badge badge-warning text-sm py-2 text-white rounded-sm w-full">100% Refund tersedia
@@ -257,7 +259,7 @@
             <!-- Card 2 -->
             <a href="javascript:void(0)"
                 @click="open = true; paket = 'Paket Outbond'; masaBerlaku = '14 Jun 2024'; hargaTiket = 15000">
-                <div class="card card-compact w-full bg-base-100 shadow-xl">
+                <div class="card card-compact w-full h-full bg-base-100 shadow-xl">
                     <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                             alt="Shoes" /></figure>
                     <div class="badge badge-warning text-sm py-2 text-white rounded-sm w-full">100% Refund tersedia
@@ -278,7 +280,7 @@
             <!-- Card 3 -->
             <a href="javascript:void(0)"
                 @click="open = true; paket = 'Paket Permainan Tradisional'; masaBerlaku = '15 Jun 2024'; hargaTiket = 20000">
-                <div class="card card-compact w-full bg-base-100 shadow-xl">
+                <div class="card card-compact w-full h-full bg-base-100 shadow-xl">
 
                     <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                             alt="Shoes" /></figure>
