@@ -63,6 +63,8 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/accounting/accounting.min.js"></script>
     <script>
         $(document).ready(function () {
             const main_slider = $("#main-slider");
@@ -81,7 +83,7 @@
                         items: 1
                     }
                 }
-            }); visu
+            });
         });
     </script>
 </head>
@@ -119,7 +121,7 @@
         </div>
     </nav>
 
-    <!-- Start Content -->
+    <!-- Start Hero Content -->
     <section>
         <div class="absolute z-30">
             <div class="grid h-screen grid-cols-1 px-3 pt-95 bg-overlay lg:grid-cols-2 md:px-4 lg:px-8">
@@ -142,7 +144,7 @@
                                 <p><strong class="font-bold">Lokasi:</strong> Desa Karangharjo, Jember</p>
                             </div>
                             <div class="flex gap-3 md:ml-auto">
-                                <a href="#" class="btn btn-secondary">Lihat Aktivitas <i
+                                <a href="javascript:void(0)" class="btn btn-secondary">Lihat Aktivitas <i
                                         class="pl-2 fas fa-play"></i></a>
                                 <button class="btn btn-primary">Pesan Paket <i class="pl-2 fas fa-plus"></i></button>
                                 <button
@@ -153,7 +155,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div id="main-slider" class="relative z-0 owl-carousel owl-theme bg-cover">
@@ -162,7 +163,7 @@
     </section>
     <!-- End Content -->
 
-    <!-- Start Section -->
+    <!-- Start services Section -->
     <section class="container mx-auto my-8 h-auto">
         <div class="text-center mb-8 mt-32">
             <h1 class="font-bold text-4xl text-green-600">
@@ -208,8 +209,22 @@
     </section>
     <!-- End Section -->
 
-    <!-- Start Section -->
-    <section class="container mx-auto my-8 h-screen">
+    <!-- Start Paket Section -->
+    <section class="container mx-auto my-8 h-screen" x-data="{ 
+            open: false,
+            paket: '',
+            masaBerlaku: '',
+            hargaTiket: 0,
+            jumlahTiket: 1,
+            tambahTiket: function() {
+                this.jumlahTiket++;
+            },
+            kurangiTiket: function() {
+                if (this.jumlahTiket > 1) {
+                    this.jumlahTiket--;
+                }
+            }
+        }" @click.away="open = false">
         <div class="text-center mb-8 mt-32">
             <h1 class="font-bold text-4xl text-green-600">
                 Paket Liburan Rumah Pintar
@@ -219,8 +234,8 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5 lg:p-10 text-black">
 
             <!-- Card 1 -->
-            <!-- Card 1 -->
-            <a href="#">
+            <a href="javascript:void(0)"
+                @click="open = true; paket = 'Paket Agrowisata'; masaBerlaku = '13 Jun 2024'; hargaTiket = 10000">
                 <div class="card card-compact w-full bg-base-100 shadow-xl">
                     <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                             alt="Shoes" /></figure>
@@ -240,7 +255,8 @@
             </a>
 
             <!-- Card 2 -->
-            <a href="#">
+            <a href="javascript:void(0)"
+                @click="open = true; paket = 'Paket Outbond'; masaBerlaku = '14 Jun 2024'; hargaTiket = 15000">
                 <div class="card card-compact w-full bg-base-100 shadow-xl">
                     <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                             alt="Shoes" /></figure>
@@ -260,8 +276,10 @@
             </a>
 
             <!-- Card 3 -->
-            <a href="#">
+            <a href="javascript:void(0)"
+                @click="open = true; paket = 'Paket Permainan Tradisional'; masaBerlaku = '15 Jun 2024'; hargaTiket = 20000">
                 <div class="card card-compact w-full bg-base-100 shadow-xl">
+
                     <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                             alt="Shoes" /></figure>
                     <div class="badge badge-warning text-sm py-2 text-white rounded-sm w-full">100% Refund tersedia
@@ -279,10 +297,107 @@
                 </div>
             </a>
         </div>
+
+        <!-- Popup Container -->
+        <div x-show="open" x-transition:enter="transition-transform transition-opacity ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform translate-y-full"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-300" x-transition:leave-end="opacity-0"
+            class="fixed inset-0 flex items-end justify-center bg-black bg-opacity-50 z-50">
+            <div class="bg-white p-6 rounded-lg shadow-lg m-2 lg:max-w-2xl w-full">
+                <!-- Close Button -->
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold">Detail Pesanan</h2>
+                    <button @click="open = false" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div>
+                    <!-- Form -->
+                    <form method="post" action="proses.php" class="text-gray-700 font-sans">
+                        <!-- Paket Terpilih -->
+                        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                            <h3 class="font-semibold mb-1">Paket Terpilih</h3>
+                            <p class="text-gray-700" x-text="paket"></p>
+                            <p class="text-gray-500" x-text="'Masa Berlaku: ' + masaBerlaku"></p>
+                            <p class="text-yellow-600 text-sm mt-2">Bisa 100% Refund dengan asuransi</p>
+                        </div>
+
+                        <!-- Tanggal Kunjungan -->
+                        <div class="mb-4" x-data="{ tanggalKunjungan: 'sekarang' }">
+                            <h3 class="font-semibold mb-2">Tanggal Kunjungan</h3>
+                            <div class="grid grid-cols-2 gap-3 space-x-2 mb-2">
+                                <label
+                                    :class="{ 'bg-blue-200 text-blue-700 px-3 py-2 rounded-lg cursor-pointer': tanggalKunjungan === 'sekarang', 'bg-gray-200 text-gray-700 px-3 py-2 rounded-lg cursor-pointer': tanggalKunjungan !== 'sekarang' }">
+                                    <input type="radio" x-model="tanggalKunjungan" value="sekarang" class="hidden"
+                                        name="tanggal_kunjungan">
+                                    Sekarang<br>12 Jun
+                                </label>
+                                <label
+                                    :class="{ 'bg-blue-200 text-blue-700 px-3 py-2 rounded-lg cursor-pointer': tanggalKunjungan === 'besok', 'bg-gray-200 text-gray-700 px-3 py-2 rounded-lg cursor-pointer': tanggalKunjungan !== 'besok' }">
+                                    <input type="radio" x-model="tanggalKunjungan" value="besok" class="hidden"
+                                        name="tanggal_kunjungan">
+                                    Besok<br>13 Jun
+                                </label>
+                            </div>
+                            <label class="mt-8 font-medium cursor-pointer">
+                                <input type="radio" x-model="tanggalKunjungan" value="pilih" class="sr-only"
+                                    name="tanggal_kunjungan">
+                                <p class="text-blue-600 underline">Pilih Tanggal saja</p>
+                            </label>
+                            <input type="date" x-show="tanggalKunjungan === 'pilih'"
+                                class="bg-gray-100 px-3 col-span-2 py-5 rounded-lg w-full"
+                                name="tanggal_kunjungan_pilih">
+                        </div>
+
+                        <!-- Jumlah Tiket -->
+                        <div class="mb-4 mt-8">
+                            <h3 class="font-semibold mb-2">Jumlah Tiket</h3>
+                            <div class="flex items-center">
+                                <p class="font-semibold text-green-600 text-lg"
+                                    x-text="'IDR ' + accounting.formatMoney(hargaTiket, '', 0, ',', '.') + '/pax'"></p>
+                                <div class="flex items-center ml-auto">
+                                    <span @click="kurangiTiket" role="button"
+                                        class="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg">-</span>
+                                    <input type="text" x-model="jumlahTiket"
+                                        class="w-12 text-center mx-2 bg-gray-100 rounded-lg" name="jumlah_tiket">
+                                    <span @click="tambahTiket" role="button"
+                                        class="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg">+</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total -->
+                        <div class="flex justify-end items-center mb-4">
+                            <p class="font-semibold text-lg"
+                                x-text="'Total (' + jumlahTiket + ' pax): ' + 'IDR ' + accounting.formatMoney(hargaTiket * jumlahTiket, '', 0, ',', '.')">
+                            </p>
+                        </div>
+
+                        <!-- Pesan Button -->
+                        <button type="submit"
+                            class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">Pesan</button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
     </section>
+
     <!-- End Section -->
 
-    <!-- Start Section -->
+
+    <!-- Start footer Section -->
+    <footer>
+    </footer>
     <!-- End Section -->
 
     <!-- Include FontAwesome -->
