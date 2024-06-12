@@ -98,11 +98,12 @@
                     </svg>
                 </div>
                 <ul tabindex="0"
-                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 font-medium">
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-700 rounded-box w-52 font-medium">
                     <li><a>Home</a></li>
                     <li><a>Services</a></li>
                     <li><a>Ticket</a></li>
                     <li><a>About Us</a></li>
+                    <div class="btn btn-info">Masuk</div>
                 </ul>
             </div>
             <a class="text-xl btn btn-ghost">Rumah Pintar</a>
@@ -114,6 +115,7 @@
                 <li><a>Ticket</a></li>
                 <li><a>About Us</a></li>
             </ul>
+            <div class="btn btn-info">Masuk</div>
         </div>
     </nav>
 
@@ -154,14 +156,14 @@
 
             </div>
         </div>
-        <div id="main-slider" class="relative z-0 owl-carousel owl-theme">
+        <div id="main-slider" class="relative z-0 owl-carousel owl-theme bg-cover">
             <?= $sliderItems ?>
         </div>
     </section>
     <!-- End Content -->
 
     <!-- Start Section -->
-    <section class="container mx-auto my-8 h-screen">
+    <section class="container mx-auto my-8 h-auto">
         <div class="text-center mb-8 mt-32">
             <h1 class="font-bold text-4xl text-green-600">
                 Layanan Rumah Pintar
@@ -206,8 +208,78 @@
     </section>
     <!-- End Section -->
 
-
     <!-- Start Section -->
+    <section class="container mx-auto my-8 h-screen">
+        <div class="text-center mb-8 mt-32">
+            <h1 class="font-bold text-4xl text-green-600">
+                Paket Liburan Rumah Pintar
+            </h1>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5 lg:p-10 text-black">
+
+            <!-- Card 1 -->
+            <!-- Card 1 -->
+            <a href="#">
+                <div class="card card-compact w-full bg-base-100 shadow-xl">
+                    <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                            alt="Shoes" /></figure>
+                    <div class="badge badge-warning text-sm py-2 text-white rounded-sm w-full">100% Refund tersedia
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Paket Agrowisata</h2>
+                        <div class="badge badge-success text-sm py-2 text-white rounded-md">Diskon 20%</div>
+                        <p class="hidden lg:block">Explore the great outdoors and save 20% with our Agrotourism Package.
+                            Enjoy the freedom with
+                            our 100% refund guarantee.</p>
+                        <div class="card-actions justify-end">
+                            <h1 class="font-semibold text-gray-700 p-5 text-lg">IDR 10.000</h1>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 2 -->
+            <a href="#">
+                <div class="card card-compact w-full bg-base-100 shadow-xl">
+                    <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                            alt="Shoes" /></figure>
+                    <div class="badge badge-warning text-sm py-2 text-white rounded-sm w-full">100% Refund tersedia
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Paket Outbond</h2>
+                        <div class="badge badge-success text-sm py-2 text-white rounded-md">Diskon 20%</div>
+                        <p class="hidden lg:block">Embark on thrilling adventures with our Outbound Package. Avail of a
+                            20% discount and enjoy
+                            peace of mind with our 100% refund guarantee.</p>
+                        <div class="card-actions justify-end">
+                            <h1 class="font-semibold text-gray-700 p-5 text-lg">IDR 10.000</h1>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 3 -->
+            <a href="#">
+                <div class="card card-compact w-full bg-base-100 shadow-xl">
+                    <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                            alt="Shoes" /></figure>
+                    <div class="badge badge-warning text-sm py-2 text-white rounded-sm w-full">100% Refund tersedia
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Paket Permainan Tradisional</h2>
+                        <div class="badge badge-success text-sm py-2 text-white rounded-md">Diskon 20%</div>
+                        <p class="hidden lg:block">Experience traditional joy with our Traditional Games Package. Enjoy
+                            a 20% discount and
+                            ensure satisfaction with our 100% refund guarantee.</p>
+                        <div class="card-actions justify-end">
+                            <h1 class="font-semibold text-gray-700 p-5 text-lg">IDR 10.000</h1>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
     <!-- End Section -->
 
     <!-- Start Section -->

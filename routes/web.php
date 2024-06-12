@@ -10,6 +10,8 @@ Route::get('home', 'HomeController@show', ['auth']);
 
 Route::get('dashboard', 'DashboardController@show', ['auth']);
 
+Route::get('dashboard/calender', 'DashboardController@showCalender', ['auth']);
+
 // Route::get('home', 'home');
 
 Route::get('login', 'AuthController@showLogin');

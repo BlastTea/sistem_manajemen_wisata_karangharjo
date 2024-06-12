@@ -3,8 +3,10 @@
     @click.outside="sidebarToggle = false">
     <!-- SIDEBAR HEADER -->
     <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <a href="index.html">
-            <img src="<?= $_ENV['APP_URL'] . '/storage/images/logo/logo.svg' ?>" alt="Logo" />
+        <a href="<?php echo $_ENV['APP_URL'] . '/dashboard' ?>" class="flex space-x-3 items-center">
+            <img src="<?= $_ENV['APP_URL'] . '/storage/images/logo/logo.png' ?>" alt="Logo"
+                class="w-14 h-14 rounded-lg" />
+            <h3 class="mb-4 text-xl font-bold text-bodydark2 my-auto">Rumah Pintar</h3>
         </a>
 
         <button class="block lg:hidden" @click.stop="sidebarToggle = !sidebarToggle">
@@ -28,7 +30,7 @@
                 <ul class="mb-6 flex flex-col gap-1.5">
                     <!-- Menu Item Dashboard -->
                     <li>
-                        <a href="index.html" class="group items-sidebar"
+                        <a href="<?php echo $_ENV['APP_URL'] . '/dashboard' ?>" class="group items-sidebar"
                             @click.prevent="selected = (selected === 'Dashboard' ? '':'Dashboard')"
                             :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Dashboard') || (page === 'ecommerce' || page === 'analytics' || page === 'stocks') }">
                             <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -46,7 +48,6 @@
                                     d="M15.4689 9.92822H11.8971C10.9408 9.92822 10.1533 10.7157 10.1533 11.672V15.2438C10.1533 16.2001 10.9408 16.9876 11.8971 16.9876H15.4689C16.4252 16.9876 17.2127 16.2001 17.2127 15.2438V11.7001C17.2127 10.7157 16.4252 9.92822 15.4689 9.92822ZM15.9752 15.272C15.9752 15.5532 15.7502 15.7782 15.4689 15.7782H11.8971C11.6158 15.7782 11.3908 15.5532 11.3908 15.272V11.7001C11.3908 11.4188 11.6158 11.1938 11.8971 11.1938H15.4689C15.7502 11.1938 15.9752 11.4188 15.9752 11.7001V15.272Z"
                                     fill="" />
                             </svg>
-
                             Beranda
                         </a>
                         <!-- Dropdown Menu End -->
@@ -55,7 +56,7 @@
 
                     <!-- Menu Item Calendar -->
                     <li>
-                        <a class="group items-sidebar" href="calendar.html"
+                        <a class="group items-sidebar" href="<?php echo $_ENV['APP_URL'] . '/dashboard/calender' ?>"
                             @click="selected = (selected === 'Calendar' ? '':'Calendar')"
                             :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Calendar') && (page === 'calendar') }">
                             <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -93,7 +94,6 @@
                                     d="M16.875 16.1156H1.77187C1.43438 16.1156 1.125 16.3969 1.125 16.7625C1.125 17.1281 1.40625 17.4094 1.77187 17.4094H16.875C17.2125 17.4094 17.5219 17.1281 17.5219 16.7625C17.5219 16.3969 17.2125 16.1156 16.875 16.1156Z"
                                     fill="white" />
                             </svg>
-
                             Paket Wisata
 
                             <svg class="absolute right-4 top-1/2 -translate-y-1/2 fill-current"
@@ -127,7 +127,7 @@
 
                     <!-- Menu Item Profile -->
                     <li>
-                        <a class="group items-sidebar" href="profile.html"
+                        <a class="group items-sidebar" href="<?php echo $_ENV['APP_URL'] . '/profile' ?>"
                             @click="selected = (selected === 'Profile' ? '':'Profile')"
                             :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Profile') && (page === 'profile') }"
                             :class="page === 'profile' && 'bg-graydark'">

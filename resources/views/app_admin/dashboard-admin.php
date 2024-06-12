@@ -236,6 +236,7 @@
         <!-- ===== Content Area End ===== -->
     </div>
     <!-- ===== Page Wrapper End ===== -->
+
     <script defer src="<?= $_ENV['APP_URL'] . '/js/bundle.js' ?>"></script>
 </body>
 

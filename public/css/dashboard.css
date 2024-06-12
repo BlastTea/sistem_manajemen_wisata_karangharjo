@@ -1417,6 +1417,68 @@
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
+  .event-style{
+    visibility: hidden;
+    position: absolute;
+    left: 0.5rem;
+    z-index: 99;
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    border-radius: 0.125rem;
+    border-left-width: 3px;
+    --tw-border-opacity: 1;
+    border-color: rgb(60 80 224 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(239 244 251 / var(--tw-bg-opacity));
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    text-align: left;
+    opacity: 0;
+  }
+  .group:hover .event-style{
+    visibility: visible;
+    opacity: 1;
+  }
+  .dark .event-style{
+    --tw-bg-opacity: 1;
+    background-color: rgb(49 61 74 / var(--tw-bg-opacity));
+  }
+  @media (min-width: 768px){
+  
+    .event-style{
+      visibility: visible;
+    }
+  }
+  .coloms-calender #large-rows{
+    display: none;
+  }
+  @media (min-width: 1024px){
+  
+    .coloms-calender #large-rows{
+      display: block;
+    }
+  }
+  .coloms-calender #small-rows{
+    display: block;
+  }
+  @media (min-width: 1024px){
+  
+    .coloms-calender #small-rows{
+      display: none;
+    }
+  }
+  .calender table tr{
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
   .sr-only{
     position: absolute;
     width: 1px;
@@ -1430,9 +1492,6 @@
   }
   .pointer-events-none{
     pointer-events: none;
-  }
-  .invisible{
-    visibility: hidden;
   }
   .static{
     position: static;
@@ -1551,9 +1610,6 @@
   .z-50{
     z-index: 50;
   }
-  .z-99{
-    z-index: 99;
-  }
   .z-9999{
     z-index: 9999;
   }
@@ -1619,6 +1675,9 @@
   }
   .mb-2{
     margin-bottom: 0.5rem;
+  }
+  .mb-2\.5{
+    margin-bottom: 0.625rem;
   }
   .mb-3{
     margin-bottom: 0.75rem;
@@ -1750,20 +1809,11 @@
   .h-14{
     height: 3.5rem;
   }
-  .h-15{
-    height: 3.75rem;
-  }
-  .h-16{
-    height: 4rem;
-  }
   .h-2{
     height: 0.5rem;
   }
   .h-2\.5{
     height: 0.625rem;
-  }
-  .h-20{
-    height: 5rem;
   }
   .h-3{
     height: 0.75rem;
@@ -1963,11 +2013,6 @@
   .flex-shrink-0{
     -ms-flex-negative: 0;
         flex-shrink: 0;
-  }
-  .flex-grow{
-    -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
   }
   .table-auto{
     table-layout: auto;
@@ -2237,9 +2282,6 @@
   }
   .border-l-6{
     border-left-width: 6px;
-  }
-  .border-l-\[3px\]{
-    border-left-width: 3px;
   }
   .border-r{
     border-right-width: 1px;
@@ -2615,6 +2657,9 @@
   .pr-1{
     padding-right: 0.25rem;
   }
+  .pr-10{
+    padding-right: 2.5rem;
+  }
   .pr-12{
     padding-right: 3rem;
   }
@@ -2886,10 +2931,6 @@
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
   }
-  .duration-500{
-    -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-  }
   .ease-in-out{
     -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -2899,6 +2940,124 @@
             transition-timing-function: linear;
   }
   /* Chrome, Safari and Opera */
+  .calender{
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0.125rem;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(226 232 240 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-shadow: 0px 8px 13px -3px rgba(0, 0, 0, 0.07);
+    --tw-shadow-colored: 0px 8px 13px -3px var(--tw-shadow-color);
+    -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+  .dark .calender{
+    --tw-border-opacity: 1;
+    border-color: rgb(46 58 71 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(36 48 63 / var(--tw-bg-opacity));
+  }
+  .coloms-calender{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 3.75rem;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding: 0.25rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+  }
+  @media (min-width: 640px){
+  
+    .coloms-calender{
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
+  @media (min-width: 1280px){
+  
+    .coloms-calender{
+      padding: 1.25rem;
+    }
+  }
+  .rows-calender{
+    position: relative;
+    height: 5rem;
+    cursor: pointer;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(226 232 240 / var(--tw-border-opacity));
+    padding: 0.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+    -webkit-transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, -webkit-box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, -webkit-box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+    -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+  }
+  .rows-calender:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(239 244 251 / var(--tw-bg-opacity));
+  }
+  .dark .rows-calender{
+    --tw-border-opacity: 1;
+    border-color: rgb(46 58 71 / var(--tw-border-opacity));
+  }
+  .dark .rows-calender:hover{
+    --tw-bg-opacity: 1;
+    background-color: rgb(49 61 74 / var(--tw-bg-opacity));
+  }
+  @media (min-width: 768px){
+  
+    .rows-calender{
+      height: 6.25rem;
+      padding: 1.5rem;
+    }
+  }
+  @media (min-width: 1280px){
+  
+    .rows-calender{
+      height: 7.75rem;
+    }
+  }
+  .calender-text{
+    font-weight: 500;
+    --tw-text-opacity: 1;
+    color: rgb(28 36 52 / var(--tw-text-opacity));
+  }
+  .dark .calender-text{
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+  .calender-event{
+    height: 4rem;
+    width: 100%;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    cursor: pointer;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  @media (min-width: 768px){
+  
+    .calender-event{
+      height: 7.5rem;
+    }
+  }
   
   /* third-party libraries CSS */
   
@@ -3453,11 +3612,6 @@
     font-weight: 400;
   }
   
-  .hover\:bg-gray:hover{
-    --tw-bg-opacity: 1;
-    background-color: rgb(239 244 251 / var(--tw-bg-opacity));
-  }
-  
   .hover\:bg-gray-3:hover{
     --tw-bg-opacity: 1;
     background-color: rgb(250 250 250 / var(--tw-bg-opacity));
@@ -3551,6 +3705,13 @@
     border-color: rgb(60 80 224 / var(--tw-border-opacity));
   }
   
+  .focus-visible\:shadow-none:focus-visible{
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+  
   .focus-visible\:outline-none:focus-visible{
     outline: 2px solid transparent;
     outline-offset: 2px;
@@ -3570,17 +3731,13 @@
     background-color: rgb(245 247 253 / var(--tw-bg-opacity));
   }
   
-  .group:hover .group-hover\:visible{
-    visibility: visible;
-  }
-  
   .group:hover .group-hover\:text-primary{
     --tw-text-opacity: 1;
     color: rgb(60 80 224 / var(--tw-text-opacity));
   }
   
-  .group:hover .group-hover\:opacity-100{
-    opacity: 1;
+  .dark .dark\:block{
+    display: block;
   }
   
   .dark .dark\:inline-block{
@@ -3713,6 +3870,10 @@
   .dark .dark\:hover\:bg-meta-4:hover{
     --tw-bg-opacity: 1;
     background-color: rgb(49 61 74 / var(--tw-bg-opacity));
+  }
+  
+  .dark .dark\:hover\:bg-opacity-80:hover{
+    --tw-bg-opacity: 0.8;
   }
   
   .dark .dark\:focus\:border-primary:focus{
@@ -3880,11 +4041,6 @@
       padding-bottom: 1.875rem;
     }
   
-    .sm\:text-base{
-      font-size: 1rem;
-      line-height: 1.5rem;
-    }
-  
     .sm\:text-title-xl2{
       font-size: 33px;
       line-height: 45px;
@@ -3893,24 +4049,12 @@
   
   @media (min-width: 768px){
   
-    .md\:visible{
-      visibility: visible;
-    }
-  
     .md\:mt-6{
       margin-top: 1.5rem;
     }
   
     .md\:hidden{
       display: none;
-    }
-  
-    .md\:h-25{
-      height: 6.25rem;
-    }
-  
-    .md\:h-30{
-      height: 7.5rem;
     }
   
     .md\:h-65{
@@ -3959,10 +4103,6 @@
   
     .lg\:mt-9{
       margin-top: 2.25rem;
-    }
-  
-    .lg\:block{
-      display: block;
     }
   
     .lg\:hidden{
@@ -4028,10 +4168,6 @@
   
     .xl\:block{
       display: block;
-    }
-  
-    .xl\:h-31{
-      height: 7.75rem;
     }
   
     .xl\:w-1\/2{
@@ -4133,6 +4269,11 @@
   
     .\32xl\:p-10{
       padding: 2.5rem;
+    }
+  
+    .\32xl\:px-20{
+      padding-left: 5rem;
+      padding-right: 5rem;
     }
   
     .\32xl\:px-7{
