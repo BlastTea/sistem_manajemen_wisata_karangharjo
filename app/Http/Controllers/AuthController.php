@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Providers\Hash;
 use App\Providers\Request;
 use App\Providers\Validator;
+use App\Providers\Route;
 
 class AuthController
 {
@@ -39,25 +40,26 @@ class AuthController
                 $user = $userByUsername;
             }
 
-            if (!$user) {
+
+            if (!$user || !Hash::check($password, $user->password)) {
                 return response()->json(['message' => 'Invalid email/username or password'], 401);
             }
 
-            // Check user role and redirect accordingly
-            switch ($user->role) {
-                case 'admin':
-                    return view('app_admin/dashboard-admin', ['message' => 'Login Success', 'data' => $user]);
-                case 'manager':
-                    return view('app_manager/dashboard-manager', ['message' => 'Login Success', 'data' => $user]);
-                case 'visitor':
-                default:
-                    return view('home', ['message' => 'Login Success', 'data' => $user]);
+
+            // Set session user
+            $request->setSession('user', $user);
+
+            // Redirect based on user role
+            if ($user->role === 'admin' || $user->role === 'manager') {
+                Route::redirect('dashboard'); // Redirect to dashboard for admin/manager
+            } else {
+                Route::redirect('home'); // Redirect to home for other roles
             }
+
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong. Please try again later.'], 500);
         }
     }
-
 
 
     public function register(Request $request)
@@ -87,10 +89,12 @@ class AuthController
             // Save the user
             $user->save();
 
-            // Return a success response
-            return $request->session(view('home', [
-                'message' => 'User has been created successfully',
-            ]));
+            // Set session user
+            $request->setSession('user', $user);
+
+            // Redirect to home page with a success message
+            Route::redirect('home');
+
         } catch (\Exception $e) {
             // Check if the error is due to duplicate username
             if (strpos($e->getMessage(), 'users_username_unique') !== false) {
@@ -101,6 +105,7 @@ class AuthController
             return response()->json(['message' => 'Failed to create user.'], 500);
         }
     }
+
 
 
 

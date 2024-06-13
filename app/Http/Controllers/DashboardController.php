@@ -12,7 +12,7 @@ class DashboardController
         return view('app_admin/dashboard-admin');
     }
 
-    public function showCalender()
+    public function showCalendar()
     {
         // $events = [
         //     1 => ['Redesign Website', '1 Dec - 2 Dec'],

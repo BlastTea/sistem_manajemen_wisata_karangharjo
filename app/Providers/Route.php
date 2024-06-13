@@ -52,6 +52,18 @@ class Route
         self::add('OPTIONS', $uri, $action, $middlewares);
     }
 
+    // New methods for URL generation and redirect
+    public static function url($uri)
+    {
+        return $_ENV['APP_URL'] . '/' . ltrim($uri, '/');
+    }
+
+    public static function redirect($uri)
+    {
+        header("Location: " . self::url($uri));
+        exit;
+    }
+
     public static function run($basePath)
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -79,7 +91,7 @@ class Route
                 }, function () use ($action, $request) {
                     if (is_callable($action)) {
                         $result = call_user_func($action, $request);
-                        
+
                         if ($result instanceof \App\Providers\Response) {
                             return $result->send();
                         }
