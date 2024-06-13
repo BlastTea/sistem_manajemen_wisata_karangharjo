@@ -59,13 +59,16 @@ class Request
         return $this->files;
     }
 
-    public function session($key, $default = null)
-    {
-        return $_SESSION[$key] ?? $default;
-    }
-
     public function setSession($key, $value)
     {
         $_SESSION[$key] = $value;
+    }
+
+    public function getSession($key)
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        return $_SESSION[$key] ?? null;
     }
 }

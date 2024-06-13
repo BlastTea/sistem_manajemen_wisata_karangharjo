@@ -8,10 +8,9 @@ use App\Providers\Request;
 
 class AuthMiddleware implements Middleware {
     public function handle(Request $request, Closure $next) {
-        // if (!isset($_SESSION['user'])) {
-        //     header('Location: login.php');
-        //     exit;
-        // }
+        if (!$request->getSession('user')) {
+            return view('auth/login');
+        }
 
         return $next($request);
     }
