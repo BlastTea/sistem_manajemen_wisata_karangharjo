@@ -28,3 +28,10 @@ function response()
 {
     return new Response();
 }
+
+function logError(Exception $e) {
+    $date = date('Y-m-d H:i:s');
+    $errorMessage = "{$date} - Error: " . $e->getMessage() . " in " . $e->getFile() . " on line " . $e->getLine() . "\n";
+
+    file_put_contents(__DIR__ . '/logs/error.log', $errorMessage, FILE_APPEND);
+}
