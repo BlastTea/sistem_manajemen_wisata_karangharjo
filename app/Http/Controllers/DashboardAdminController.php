@@ -5,11 +5,21 @@ namespace App\Http\Controllers;
 use DateTime;
 use App\Providers\Request;
 
-class DashboardController
+class DashboardAdminController
 {
     public function show(Request $request)
     {
         return view('app_admin/dashboard-admin');
+    }
+
+    public function showPakets(Request $request)
+    {
+        return view('app_admin/paket');
+    }
+
+    public function showInvoice(Request $request)
+    {
+        return view('app_admin/pesanan');
     }
 
     public function showCalendar()
