@@ -42,7 +42,7 @@ class AuthController
 
 
             if (!$user || !Hash::check($password, $user->password)) {
-                return response()->json(['message' => 'Invalid email/username or password'], 401);
+                Route::redirect('register');
             }
 
 
@@ -51,16 +51,15 @@ class AuthController
 
             // Redirect based on user role
             if ($user->role === 'admin' || $user->role === 'manager') {
-                Route::redirect('dashboard'); // Redirect to dashboard for admin/manager
+                Route::redirect('dashboard');
             } else {
-                Route::redirect('home'); // Redirect to home for other roles
+                Route::redirect('home');
             }
 
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong. Please try again later.'], 500);
         }
     }
-
 
     public function register(Request $request)
     {

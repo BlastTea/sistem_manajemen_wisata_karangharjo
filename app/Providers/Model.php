@@ -73,7 +73,7 @@ abstract class Model implements \JsonSerializable
 
     protected function getForeignKey()
     {
-        return strtolower(static::class) . '_id';
+        return strtolower(static::class) . '_ide';
     }
 
     protected function getJoinTable($related)

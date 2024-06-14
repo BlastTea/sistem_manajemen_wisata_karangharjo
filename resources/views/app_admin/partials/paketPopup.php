@@ -5,8 +5,9 @@
     x-transition:leave-end="scale-75">
     <div class="modal-popup-edit overflow-scroll">
         <h2 class="text-lg font-bold mb-4 text-boxdark dark:text-bodydark">Edit Paket Wisata</h2>
-        <form @submit.prevent="showEditPopup = false">
-            <div class="mb-4">
+        <form @submit.prevent="showEditPopup = false" @submit.prevent="updateTourPackage(currentRow.id)" method=" POST"
+            enctype="multipart/form-data">
+            <div class=" mb-4">
                 <label class="labels-style-modal dark:text-white">Nama</label>
                 <input type="text" class="input-modal-style" x-model="currentRow.name">
             </div>
@@ -44,7 +45,7 @@
 </div>
 
 <!-- Pop up Delete -->
-<div x-show="showDeletePopup" class="modal-popup" x-transition:enter="transform transition ease-out duration-300"
+<!-- <div x-show="showDeletePopup" class="modal-popup" x-transition:enter="transform transition ease-out duration-300"
     x-transition:enter-start="scale-75" x-transition:enter-end="scale-100"
     x-transition:leave="transform transition ease-in duration-300" x-transition:leave-start="scale-100"
     x-transition:leave-end="scale-75">
@@ -55,7 +56,28 @@
         </p>
         <div class="flex justify-end space-x-4 mt-4">
             <button @click="showDeletePopup = false; paketList.splice(paketList.indexOf(currentRow), 1)"
-                class="btn-danger">
+                onclick="deleteTourPackage(currentRow.id)" class="btn-danger">
+                Hapus
+            </button>
+            <button @click="showDeletePopup = false" class="btn-reject">
+                Batal
+            </button>
+        </div>
+    </div>
+</div> -->
+
+<!-- Pop up Delete -->
+<div x-show="showDeletePopup" class="modal-popup" x-transition:enter="transform transition ease-out duration-300"
+    x-transition:enter-start="scale-75" x-transition:enter-end="scale-100"
+    x-transition:leave="transform transition ease-in duration-300" x-transition:leave-start="scale-100"
+    x-transition:leave-end="scale-75">
+    <div class="bg-white dark:bg-boxdark-2 p-6 rounded-lg shadow-lg">
+        <h2 class="text-lg font-bold mb-4 text-boxdark dark:text-bodydark">Hapus Paket Wisata</h2>
+        <p class="text-boxdark dark:text-bodydark1">Apakah Anda yakin ingin menghapus paket wisata ini?</p>
+        <p class="text-boxdark dark:text-bodydark1">Nama: <span x-text="currentRow ? currentRow.name : ''"></span>
+        </p>
+        <div class="flex justify-end space-x-4 mt-4">
+            <button @click="showDeletePopup = false; deleteTourPackage(currentRow.id);" class="btn-danger">
                 Hapus
             </button>
             <button @click="showDeletePopup = false" class="btn-reject">
@@ -65,16 +87,69 @@
     </div>
 </div>
 
+
+<!-- Bagian JavaScript -->
+
+<!-- Edit Data -->
 <script>
-    function updateImage(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                currentRow.image = e.target.result;
-                previewImage = e.target.result;
-            };
-            reader.readAsDataURL(file);
+    const updateTourPackage = async (id) => {
+        try {
+            const formData = new FormData();
+            formData.append('name', currentRow.name);
+            formData.append('price', currentRow.price);
+            formData.append('expiration', currentRow.expiration);
+            formData.append('visible', currentRow.visible ? '1' : '0');
+            // tambahkan data lain yang perlu di-update
+
+            // Pengecekan URL sebelum melakukan fetch
+            const appUrl = "<?php echo $_ENV['APP_URL'] ?>";
+            if (!appUrl) {
+                throw new Error('APP_URL is not set properly.');
+            }
+
+            const url = `${appUrl}/dashboard/paket/update?id=${id}`;
+            const response = await fetch(url, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update Tour Package.');
+            }
+
+            showEditPopup = false;
+
+        } catch (error) {
+            console.error('Error updating Tour Package:', error);
         }
-    }
+    };
+
+</script>
+
+<!-- JavaScript menggunakan Alpine.js -->
+<script>
+    const app = {
+        showDeletePopup: false,
+        currentRow: null,
+        paketList: <?php echo htmlspecialchars(json_encode($list_paket), ENT_QUOTES, 'UTF-8'); ?>,
+
+        deleteTourPackage(id) {
+            // Kirim permintaan penghapusan ke server
+            fetch(`<?php echo $_ENV['APP_URL'] ?>/dashboard/paket/delete?id=${id}`, {
+                method: 'POST',
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to delete Tour Package.');
+                    }
+                    // Hapus item dari daftar lokal setelah berhasil
+                    this.paketList.splice(this.paketList.findIndex(paket => paket.id === id), 1);
+                    this.showDeletePopup = false;
+                })
+                .catch(error => {
+                    console.error('Error deleting Tour Package:', error);
+                    // Tampilkan pesan atau tindakan lain jika gagal menghapus
+                });
+        },
+    };
 </script>

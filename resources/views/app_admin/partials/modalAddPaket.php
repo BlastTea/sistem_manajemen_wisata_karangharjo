@@ -23,11 +23,10 @@
         <div class="relative bg-white dark:bg-boxdark p-8 rounded-lg shadow-lg w-10/12">
             <!-- Isi Modal -->
             <h2 class="text-2xl font-semibold text-boxdark dark:text-gray-2 mb-6">Tambah Paket Baru</h2>
-            <form>
+            <form action="<?php echo $_ENV['APP_URL'] . '/dashboard/paket/create' ?>" method="POST" enctype="multipart/form-data">
                 <!-- Input Gambar -->
                 <div class="mb-4">
-                    <label for="gambar" class="labels-style-modal">Gambar
-                        Paket</label>
+                    <label for="gambar" class="labels-style-modal">Gambar Paket</label>
                     <input type="file" id="gambar" name="gambar" class="input-modal-style">
                 </div>
 
@@ -41,15 +40,14 @@
                 <!-- Input Harga -->
                 <div class="mb-4">
                     <label for="harga" class="labels-style-modal">Harga Paket</label>
-                    <input type="text" id="harga" name="harga" class="input-modal-style"
+                    <input type="number" id="harga" name="harga" class="input-modal-style"
                         placeholder="Masukkan harga paket">
                 </div>
 
                 <!-- Input Deskripsi -->
                 <div class="mb-6">
-                    <label for="deskripsi" class="labels-style-modal">Deskripsi
-                        Paket</label>
-                    <textarea id="deskripsi" name="deskripsi" class="input-modal-style h-32 resize-none "
+                    <label for="deskripsi" class="labels-style-modal">Deskripsi Paket</label>
+                    <textarea id="deskripsi" name="deskripsi" class="input-modal-style h-32 resize-none"
                         placeholder="Masukkan deskripsi paket"></textarea>
                 </div>
 
