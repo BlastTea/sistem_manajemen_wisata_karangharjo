@@ -1,4 +1,4 @@
-<header class="header">
+<header class="flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none sticky top-0">
 
     <div class="header-content">
 

@@ -71,10 +71,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Di dalam template Alpine.js -->
-                                        <template
-                                            x-for="(row, index) in <?= htmlspecialchars(json_encode($orders), ENT_QUOTES, 'UTF-8') ?>"
-                                            :key="index">
+                                        <template x-for="(row, index) in [
+                                            { name: 'Free Package', price: '$0.00', date: 'Jan 13, 2023', status: 'Paid' },
+                                                { name: 'Basic Package', price: '$19.99', date: 'Feb 20, 2023', status: 'Pending' }
+                                            ]" :key="index">
                                             <tr>
                                                 <td
                                                     class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
@@ -146,7 +146,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <?php include __DIR__ . '/partials/pesananPopup.php' ?>
+                            <?php include __DIR__ . '/partials/paketPopup.php' ?>
                         </div>
                     </div>
                 </div>

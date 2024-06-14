@@ -1,5 +1,5 @@
 <aside :class="sidebarToggle ? 'translate-x-0' : '-translate-x-full'"
-    class="absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0"
+    class="absolute left-0 top-0 z-99 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0"
     @click.outside="sidebarToggle = false">
     <!-- SIDEBAR HEADER -->
     <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
@@ -48,7 +48,6 @@
                                     d="M15.4689 9.92822H11.8971C10.9408 9.92822 10.1533 10.7157 10.1533 11.672V15.2438C10.1533 16.2001 10.9408 16.9876 11.8971 16.9876H15.4689C16.4252 16.9876 17.2127 16.2001 17.2127 15.2438V11.7001C17.2127 10.7157 16.4252 9.92822 15.4689 9.92822ZM15.9752 15.272C15.9752 15.5532 15.7502 15.7782 15.4689 15.7782H11.8971C11.6158 15.7782 11.3908 15.5532 11.3908 15.272V11.7001C11.3908 11.4188 11.6158 11.1938 11.8971 11.1938H15.4689C15.7502 11.1938 15.9752 11.4188 15.9752 11.7001V15.272Z"
                                     fill="" />
                             </svg>
-
                             Beranda
                         </a>
                         <!-- Dropdown Menu End -->
@@ -114,13 +113,12 @@
                                 <li>
                                     <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
                                         href="<?php echo $_ENV['APP_URL'] . '/dashboard/pesanan' ?>"
-                                        :class="page === 'formElements' && '!text-white'">Daftar Pesanan</a>
+                                        :class="page === 'formElements' && '!text-white'">Pesanan Pelanggan</a>
                                 </li>
                                 <li>
                                     <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
                                         href="<?php echo $_ENV['APP_URL'] . '/dashboard/paket' ?>"
-                                        :class="page === 'formLayout' && '!text-white'">Daftar
-                                        Paket</a>
+                                        :class="page === 'formLayout' && '!text-white'">Paket Wisata</a>
                                 </li>
                             </ul>
                         </div>

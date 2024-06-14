@@ -14,12 +14,22 @@ class DashboardAdminController
 
     public function showPakets(Request $request)
     {
-        return view('app_admin/paket');
+        $list_paket = [
+            ['name' => 'Free Package', 'image' => $_ENV['APP_URL'] . '/storage/images/background/IMG_0121.png', 'price' => '$0.00', 'expiration' => '7 days', 'visible' => true],
+            ['name' => 'Basic Package', 'image' => $_ENV['APP_URL'] . '/storage/images/background/IMG_0122.png', 'price' => '$29.99', 'expiration' => '30 days', 'visible' => false],
+            ['name' => 'Premium Package', 'image' => $_ENV['APP_URL'] . '/storage/images/background/IMG_0123.png', 'price' => '$99.99', 'expiration' => '90 days', 'visible' => true]
+        ];
+
+        return view('app_admin/paket', ['list_paket' => $list_paket]);
     }
 
     public function showInvoice(Request $request)
     {
-        return view('app_admin/pesanan');
+        $orders = [
+            ['name' => 'Free Package', 'price' => '$0.00', 'date' => 'Jan 13, 2023', 'status' => 'Paid'],
+            ['name' => 'Basic Package', 'price' => '$19.99', 'date' => 'Feb 20, 2023', 'status' => 'Pending']
+        ];
+        return view('app_admin/pesanan', ['orders' => $orders]);
     }
 
     public function showCalendar()
