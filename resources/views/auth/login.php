@@ -7,7 +7,6 @@
 </head>
 
 <body
-    <?php echo(view_path('root_components/head_app.php')); ?>
     x-data="{ page: 'signin', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
     x-init="
           darkMode = JSON.parse(localStorage.getItem('darkMode'));
