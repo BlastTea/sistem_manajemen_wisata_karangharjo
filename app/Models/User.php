@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Providers\Model;
+use App\Providers\Auth;
 
 class User extends Model
 {
@@ -23,5 +24,9 @@ class User extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public static function Auth()
+    {
+        return Auth::user();
+    }
 }
-?>
