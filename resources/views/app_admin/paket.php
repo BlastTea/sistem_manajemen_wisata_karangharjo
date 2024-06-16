@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php include __DIR__ . '\..\root_components\head_app.php'; ?>
+    <?php include view_path('root_components/head_app.php'); ?>
     <title>Dashboard | Rumah Pintar Karangharjo</title>
 </head>
 
@@ -14,20 +14,20 @@
             $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)));
         " :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
 
-    <?php include __DIR__ . '\..\root_components\loading.php'; ?>
+    <?php include view_path('root_components\loading.php'); ?>
 
     <!-- ===== Page Wrapper Start ===== -->
     <div class="flex h-screen overflow-hidden">
 
         <!-- ===== Sidebar Start ===== -->
-        <?php include __DIR__ . '\..\root_components\sidebar.php'; ?>
+        <?php include view_path('root_components\sidebar.php'); ?>
         <!-- ===== Sidebar End ===== -->
 
         <!-- ===== Content Area Start ===== -->
         <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
 
             <!-- ===== Header Start ===== -->
-            <?php include __DIR__ . '\..\root_components\header.php'; ?>
+            <?php include view_path('root_components\header.php'); ?>
             <!-- ===== Header End ===== -->
 
             <!-- ===== Main Content Start ===== -->
@@ -51,7 +51,7 @@
                         </div>
                         <!-- Breadcrumb End -->
 
-                        <?php include __DIR__ . '/partials/modalAddPaket.php'; ?>
+                        <?php include view_path('app_admin/partials/modalAddPaket.php'); ?>
 
                         <!-- Table invoice -->
                         <div class="overflow-x-auto w-screen">
@@ -131,7 +131,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <?php include __DIR__ . '/partials/paketPopup.php' ?>
+                        <?php include view_path('app_admin/partials/paketPopup.php') ?>
                     </div>
                 </div>
             </main>
