@@ -99,7 +99,8 @@ class Route
                         return $result;
                     }
 
-                    if (str_contains($action, '@')) {
+                    // if (str_contains($action, '@')) {
+                    if (strpos($action, '@')) {
                         list($controllerName, $method) = explode('@', $action);
                         $controllerClass = "App\\Http\\Controllers\\$controllerName";
                         $controller = new $controllerClass();

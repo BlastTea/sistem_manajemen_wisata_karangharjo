@@ -34,7 +34,7 @@ try {
         $segments = explode('/', $path);
         
         if ($segments[0] === '') {
-            header("Location: " . base_url() . "/home");
+            header("Location: " . base_url('home'));
             exit;
         }
         
