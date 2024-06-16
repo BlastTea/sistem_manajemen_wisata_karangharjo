@@ -18,7 +18,6 @@ try {
     if (!session_id()) {
         session_start();
     }
-        
 
     $pdo = new PDO($_ENV['DB_CONNECTION'] . ':host=' . $_ENV['DB_HOST'] . ';port=' . $_ENV['DB_PORT'] . ';dbname=' . $_ENV['DB_DATABASE'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
     Model::setConnection($pdo);

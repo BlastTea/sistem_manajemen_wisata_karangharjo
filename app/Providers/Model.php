@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use PDO;
+use JsonSerializable;
 
-abstract class Model implements \JsonSerializable
+abstract class Model implements JsonSerializable
 {
     protected static $connection;
     protected static $table = '';
