@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-    <?php include resource_path('root_components\head_app.php'); ?>
+    <?php include view_path('root_components/head_app.php'); ?>
     <title>Sign In | Rumah Pintar Karangharjo</title>
 </head>
 
 <body
+    <?php echo(view_path('root_components/head_app.php')); ?>
     x-data="{ page: 'signin', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
     x-init="
           darkMode = JSON.parse(localStorage.getItem('darkMode'));
@@ -14,7 +15,7 @@
     :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
 
     <!-- ===== Preloader Start ===== -->
-    <?php include resource_path('root_components/loading.php') ?>
+    <?php include view_path('root_components/loading.php') ?>
     <!-- ===== Preloader End ===== -->
 
     <!-- ===== Content Area Start ===== -->
