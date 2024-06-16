@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DateTime;
 use App\Models\Image;
+use App\Providers\Auth;
 use App\Providers\Route;
 use App\Providers\Request;
 use App\Models\TourPackage;
@@ -11,9 +12,13 @@ use App\Providers\Validator;
 
 class DashboardAdminController
 {
-    public function show()
+    public function show(Request $request)
     {
-        return view('app_admin/dashboard-admin');
+        $user = Auth::user();
+        if ($user->role == 'admin'){
+            return view('app_admin/dashboard-admin');
+        }
+        return Route::redirect('home');
     }
 
     public function showPakets()
@@ -89,7 +94,7 @@ class DashboardAdminController
             // Simpan data tour package
             $tourPackage->save();
 
-            
+
             Route::redirect('/dashboard/paket');
 
         } catch (\Exception $e) {

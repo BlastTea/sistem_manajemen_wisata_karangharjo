@@ -7,6 +7,7 @@ use App\Providers\Hash;
 use App\Providers\Request;
 use App\Providers\Validator;
 use App\Providers\Route;
+use App\Providers\Auth;
 
 class AuthController
 {
@@ -40,17 +41,16 @@ class AuthController
                 $user = $userByUsername;
             }
 
-
             if (!$user || !Hash::check($password, $user->password)) {
                 Route::redirect('register');
             }
 
-
-            // Set session user
-            $request->setSession('user', $user);
+            // Login user
+            Auth::login($user);
 
             // Redirect based on user role
             if ($user->role === 'admin' || $user->role === 'manager') {
+                echo ($user);
                 Route::redirect('dashboard');
             } else {
                 Route::redirect('home');
@@ -88,8 +88,8 @@ class AuthController
             // Save the user
             $user->save();
 
-            // Set session user
-            $request->setSession('user', $user);
+            // Login user
+            Auth::login($user);
 
             // Redirect to home page with a success message
             Route::redirect('home');
@@ -104,9 +104,6 @@ class AuthController
             return response()->json(['message' => 'Failed to create user.'], 500);
         }
     }
-
-
-
 
     public function showLogin(Request $request)
     {
