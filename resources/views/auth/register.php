@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php include __DIR__ . '\..\root_components\head_app.php'; ?>
+    <?php include resource_path('root_components\head_app.php'); ?>
     <title>Sign In | TailAdmin - Tailwind CSS Admin Dashboard Template</title>
 </head>
 
@@ -14,7 +14,7 @@
     :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
 
     <!-- ===== Preloader Start ===== -->
-    <?php include __DIR__ . '\..\root_components/loading.php' ?>
+    <?php include resource_path('root_components/loading.php') ?>
     <!-- ===== Preloader End ===== -->
 
     <!-- ===== Content Area Start ===== -->
