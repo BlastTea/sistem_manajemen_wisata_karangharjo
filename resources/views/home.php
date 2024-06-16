@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Wisata Desa Karangharjo | Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= $_ENV['APP_URL'] . '/css/homepage.css' ?>">
+    <link rel="stylesheet" href="<?= css_path('homepage.css') ?>">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -105,7 +105,7 @@
                     <li><a>Services</a></li>
                     <li><a>Ticket</a></li>
                     <li><a>About Us</a></li>
-                    <a href="<?php echo $_ENV['APP_URL'] . '/login' ?>" class="btn btn-info">login</a>
+                    <a href="<?php echo base_url('login') ?>" class="btn btn-info">login</a>
                 </ul>
             </div>
             <a class="text-xl btn btn-ghost">Rumah Pintar</a>
@@ -117,7 +117,7 @@
                 <li><a>Ticket</a></li>
                 <li><a>About Us</a></li>
             </ul>
-            <a href="<?php echo $_ENV['APP_URL'] . '/login' ?>" class="btn btn-info">login</a>
+            <a href="<?php echo base_url('login') ?>" class="btn btn-info">login</a>
         </div>
     </nav>
 

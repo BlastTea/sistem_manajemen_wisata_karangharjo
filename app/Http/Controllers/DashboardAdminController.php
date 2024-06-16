@@ -39,7 +39,7 @@ class DashboardAdminController
 
             if ($image) {
                 // Sesuaikan path URL sesuai dengan struktur direktori yang benar
-                $packageData['image'] = $_ENV['APP_URL'] . '/storage/images/background/' . $image->image_url;
+                $packageData['image'] = storage_path('images/background/') . $image->image_url;
             } else {
                 $packageData['image'] = ''; // Atau berikan default jika tidak ada gambar
             }

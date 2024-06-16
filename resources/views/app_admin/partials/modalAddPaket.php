@@ -23,7 +23,7 @@
         <div class="relative bg-white dark:bg-boxdark p-8 rounded-lg shadow-lg w-10/12">
             <!-- Isi Modal -->
             <h2 class="text-2xl font-semibold text-boxdark dark:text-gray-2 mb-6">Tambah Paket Baru</h2>
-            <form action="<?php echo $_ENV['APP_URL'] . '/dashboard/paket/create' ?>" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url('dashboard/paket/create') ?>" method="POST" enctype="multipart/form-data">
                 <!-- Input Gambar -->
                 <div class="mb-4">
                     <label for="gambar" class="labels-style-modal">Gambar Paket</label>

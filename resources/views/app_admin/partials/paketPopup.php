@@ -102,7 +102,7 @@
             // tambahkan data lain yang perlu di-update
 
             // Pengecekan URL sebelum melakukan fetch
-            const appUrl = "<?php echo $_ENV['APP_URL'] ?>";
+            const appUrl = "<?php echo base_url() ?>";
             if (!appUrl) {
                 throw new Error('APP_URL is not set properly.');
             }
@@ -135,7 +135,7 @@
 
         deleteTourPackage(id) {
             // Kirim permintaan penghapusan ke server
-            fetch(`<?php echo $_ENV['APP_URL'] ?>/dashboard/paket/delete?id=${id}`, {
+            fetch(`<?php echo base_url() ?>/dashboard/paket/delete?id=${id}`, {
                 method: 'POST',
             })
                 .then(response => {

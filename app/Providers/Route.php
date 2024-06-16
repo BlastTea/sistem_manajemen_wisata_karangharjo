@@ -55,7 +55,7 @@ class Route
     // New methods for URL generation and redirect
     public static function url($uri)
     {
-        return $_ENV['APP_URL'] . '/' . ltrim($uri, '/');
+        return base_url($uri);
     }
 
     public static function redirect($uri)

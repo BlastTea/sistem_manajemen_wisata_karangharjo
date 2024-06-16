@@ -3,7 +3,7 @@
 use App\Providers\Route;
 
 // Guest Start
-Route::get('home', 'HomeController@show', ['auth']);
+Route::get('home', 'HomeController@show', ['home']);
 Route::get('login', 'AuthController@showLogin');
 Route::get('register', 'AuthController@showRegister');
 Route::post('login', 'AuthController@login');
