@@ -2,22 +2,32 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AuthMiddleware;
+
 class Kernel
 {
     protected $middlewares = [
         'global' => [
-            // \App\Http\Middleware\AuthMiddleware::class
+            AuthMiddleware::class,
+        ],
+        'admin' => [
+            AdminMiddleware::class,
+        ],
+        'manager' => [
+            ManagerMiddleware::class,
         ],
     ];
 
     protected $aliases = [
-        'auth' => \App\Http\Middleware\AuthMiddleware::class,
+        'auth' => AuthMiddleware::class,
+        'admin' => AdminMiddleware::class,
+        'manager' => ManagerMiddleware::class,
     ];
 
     public function getMiddlewaresForRoute($aliases)
     {
         $allMiddlewares = $this->getMiddlewareInstances($this->middlewares['global']);
-    
         return array_merge($allMiddlewares, $this->getMiddlewareInstances($aliases));
     }
 

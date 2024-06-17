@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DateTime;
+use App\Models\User;
 use App\Models\Image;
 use App\Providers\Auth;
 use App\Providers\Route;
@@ -12,16 +13,12 @@ use App\Providers\Validator;
 
 class DashboardAdminController
 {
-    public function show(Request $request)
+    public function showIndex()
     {
-        $user = Auth::user();
-        if ($user->role == 'admin'){
-            return view('app_admin/dashboard-admin');
-        }
-        return Route::redirect('home');
+        return view('app_admin/dashboard-admin', ['data' => Auth::user()]);
     }
 
-    public function showPakets()
+    public function showPackageHoliday()
     {
         // Mengambil semua paket tur beserta relasi gambar
         $tourPackages = TourPackage::all();
@@ -53,10 +50,10 @@ class DashboardAdminController
             $list_paket[] = $packageData;
         }
 
-        return view('app_admin/paket', ['list_paket' => $list_paket]);
+        return view('app_admin/holiday-packages', ['list_paket' => $list_paket]);
     }
 
-    public function addPakets(Request $request)
+    public function addPackageHoliday(Request $request)
     {
         // Validasi data
         $validator = Validator::make($request->all(), [
@@ -95,7 +92,7 @@ class DashboardAdminController
             $tourPackage->save();
 
 
-            Route::redirect('/dashboard/paket');
+            Route::redirect('/dashboard/admin/holiday-packages');
 
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to add Tour Package. ' . $e->getMessage()], 500);
@@ -103,9 +100,8 @@ class DashboardAdminController
     }
 
     // Method untuk menyimpan perubahan dari form edit
-    public function updatePakets(Request $request, $id)
+    public function updatePackageHoliday(Request $request, $id)
     {
-        echo ('masuk kok ke server');
         try {
             // Validasi input
             $validator = Validator::make($request->all(), [
@@ -116,7 +112,7 @@ class DashboardAdminController
             ]);
 
             if ($validator->fails()) {
-                Route::redirect('dashboard/paket');
+                Route::redirect('dashboard/admin/holiday-packages');
             }
 
             // Cari paket wisata yang akan diupdate
@@ -148,16 +144,16 @@ class DashboardAdminController
             $tourPackage->save();
 
             // Redirect dengan pesan sukses
-            Route::redirect('dashboard/paket');
+            Route::redirect('dashboard/admin/holiday-packages');
 
         } catch (\Exception $e) {
             // Handle jika terjadi exception
-            Route::redirect('dashboard/paket');
+            Route::redirect('dashboard/admin/holiday-packages');
             // return redirect()->back()->with('error', 'Failed to update Tour Package. ' . $e->getMessage());
         }
     }
 
-    public function deletePaket(Request $request)
+    public function deletePackageHoliday(Request $request)
     {
         try {
             $id = $request->input('id');
@@ -182,17 +178,16 @@ class DashboardAdminController
         }
     }
 
-
     public function showInvoice()
     {
         $orders = [
             ['name' => 'Free Package', 'price' => '$0.00', 'date' => 'Jan 13, 2023', 'status' => 'Paid'],
             ['name' => 'Basic Package', 'price' => '$19.99', 'date' => 'Feb 20, 2023', 'status' => 'Pending']
         ];
-        return view('app_admin/pesanan', ['orders' => $orders]);
+        return view('app_admin/visitor-orders', ['orders' => $orders]);
     }
 
-    public function showCalendar()
+    public function showCalendarEvents()
     {
         // $events = [
         //     1 => ['Redesign Website', '1 Dec - 2 Dec'],
@@ -218,7 +213,7 @@ class DashboardAdminController
 
         // Passing data kalender ke view
         // return view('app_admin/calender', ['calendarData' => $calendarData]);
-        return view('app_admin/calender');
+        return view('app_admin/calendar-events');
     }
 
     private function calculateWidth($start_date, $end_date)

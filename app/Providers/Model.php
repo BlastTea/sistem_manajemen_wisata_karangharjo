@@ -169,7 +169,7 @@ abstract class Model implements \JsonSerializable
         return json_encode($this->toArray());
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->toArray();
     }

@@ -50,8 +50,10 @@ class AuthController
             Auth::login($user);
 
             // Redirect based on user role
-            if ($user->role === 'admin' || $user->role === 'manager') {
-                Route::redirect('dashboard');
+            if ($user->role === 'admin') {
+                Route::redirect('dashboard/admin');
+            } else if ($user->role === 'manager') {
+                Route::redirect('dashboard/manager');
             } else {
                 Route::redirect('home');
             }

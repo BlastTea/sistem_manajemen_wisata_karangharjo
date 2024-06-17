@@ -91,3 +91,8 @@ register_shutdown_function(function () {
         logError(new CustomErrorException($error['message'], 0, $error['type'], $error['file'], $error['line']));
     }
 });
+
+function isUserRole($role)
+{
+    return isset($_SESSION['user']) && $_SESSION['user']->role === $role;
+}
