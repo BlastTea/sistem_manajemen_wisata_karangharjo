@@ -1,6 +1,7 @@
 <?php 
 require_once __DIR__ . '/vendor/load_env.php';
 
-$url = $_ENV['APP_URL'];
+$url = base_url();
 
 header("Location: $url");
+exit;

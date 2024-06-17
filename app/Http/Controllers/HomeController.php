@@ -9,10 +9,10 @@ class HomeController
     public function show(Request $request)
     {
         // Set base URL dan range nomor gambar
-        $baseUrl = $_ENV['APP_URL'] . '/storage/images/background/';
+        $baseUrl = storage_path('images/background/');
         $start = 121;
         $end = 130;
-
+        
         $sliderItems = '';
         for ($i = $start; $i <= $end; $i++) {
             $imageSrc = $baseUrl . 'IMG_0' . $i . '.png';

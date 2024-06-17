@@ -51,7 +51,7 @@
     <div class="content">
       <h1>400</h1>
       <h2>Halaman ini tidak bekerja untuk saat ini.</h2>
-      <a href="<?= $_ENV['APP_URL'] ?>">
+      <a href="<?= base_url() ?>">
         <button>Kembali</button>
       </a>
     </div>

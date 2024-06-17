@@ -51,7 +51,7 @@
     <div class="content">
       <h1>500</h1>
       <h2>Terjadi kesalahan internal pada server.</h2>
-      <a href="<?= $_ENV['APP_URL'] ?>">
+      <a href="<?= base_url() ?>">
         <button>Kembali</button>
       </a>
     </div>

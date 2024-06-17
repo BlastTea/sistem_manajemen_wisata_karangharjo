@@ -42,6 +42,7 @@ class AuthController
             }
 
             if (!$user || !Hash::check($password, $user->password)) {
+                // TODO: !$user menjadi 'user tidak ditemukan', dan !Hash::check menjadi 'password salah'
                 Route::redirect('register');
             }
 

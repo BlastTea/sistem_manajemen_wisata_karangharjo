@@ -51,7 +51,7 @@
     <div class="content">
       <h1>404</h1>
       <h2>Halaman yang anda cari tidak ditemukan.</h2>
-      <a href="<?= $_ENV['APP_URL'] ?>">
+      <a href="<?= base_url() ?>">
         <button>Kembali</button>
       </a>
     </div>

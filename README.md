@@ -26,3 +26,8 @@ Sistem ini dibangun dengan menggunakan teknologi web terkini, memastikan kompati
 ## Mulai Menggunakan
 
 Untuk memulai menggunakan sistem ini, pengunjung hanya perlu mendaftar dan membuat akun melalui homepage. Setelah login, semua fitur sistem akan dapat diakses sesuai dengan hak akses pengguna.
+
+## url
+- https://222410103075.pbw.ilkom.unej.ac.id/
+- https://222410103075.pbw.ilkom.unej.ac.id/uas/
+- https://dev-wisatakarangharjo.simaport.net/

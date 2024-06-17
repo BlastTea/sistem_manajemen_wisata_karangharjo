@@ -28,7 +28,7 @@
             </button>
             <!-- Hamburger Toggle BTN -->
             <a class="btn-toggle-header" href="index.html">
-                <img src="<?= $_ENV['APP_URL'] . '/storage/images/logo/logo-icon.svg' ?>" alt="Logo" />
+                <img src="<?= storage_path('images/logo/logo-icon.svg') ?>" alt="Logo" />
             </a>
         </div>
 

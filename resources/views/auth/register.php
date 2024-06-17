@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <?php include __DIR__ . '\..\root_components\head_app.php'; ?>
+    <?php include view_path('root_components\head_app.php'); ?>
     <title>Sign In | TailAdmin - Tailwind CSS Admin Dashboard Template</title>
 </head>
 
@@ -14,7 +14,7 @@
     :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
 
     <!-- ===== Preloader Start ===== -->
-    <?php include __DIR__ . '\..\root_components/loading.php' ?>
+    <?php include view_path('root_components/loading.php') ?>
     <!-- ===== Preloader End ===== -->
 
     <!-- ===== Content Area Start ===== -->
@@ -36,7 +36,7 @@
                         <div class="hidden w-full xl:block xl:w-1/2">
                             <div class="px-26 py-17.5 text-center">
                                 <span class="mt-15 inline-block">
-                                    <img src="<?= $_ENV['APP_URL'] . '/storage/images/illustration/illustration-02.svg' ?>"
+                                    <img src="<?= storage_path('images/illustration/illustration-02.svg') ?>"
                                         alt="illustration" />
                                 </span>
                             </div>
@@ -48,7 +48,7 @@
                                     Sign Up to Rumah Pintar
                                 </h2>
 
-                                <form method="post" action="<?php echo $_ENV['APP_URL'] . '/register' ?>">
+                                <form method="post" action="<?php echo base_url('register') ?>">
                                     <div class="mb-4">
                                         <label class="label-form-auth">Nama</label>
                                         <div class="relative">
@@ -111,7 +111,7 @@
 
                                     <div class="mt-6 text-center">
                                         <p class="font-medium">
-                                            Sudah memiliki akun? <a href="<?= $_ENV['APP_URL'] . '/login' ?>"
+                                            Sudah memiliki akun? <a href="<?= base_url('login') ?>"
                                                 class="text-primary">Login</a>
                                         </p>
                                     </div>
@@ -129,7 +129,7 @@
     <!-- ===== Content Area End ===== -->
     </div>
     <!-- ===== Page Wrapper End ===== -->
-    <script defer src="<?= $_ENV['APP_URL'] . '/js/bundle.js' ?>"></script>
+    <script defer src="<?= js_path('bundle.js') ?>"></script>
 </body>
 
 </html>
