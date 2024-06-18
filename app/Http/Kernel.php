@@ -3,13 +3,14 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ManagerMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 
 class Kernel
 {
     protected $middlewares = [
         'global' => [
-            AuthMiddleware::class,
+            // AuthMiddleware::class,
         ],
         'admin' => [
             AdminMiddleware::class,
