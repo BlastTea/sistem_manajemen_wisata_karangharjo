@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\Auth;
 use App\Providers\Response;
 
 function trim_path($path)
@@ -92,7 +93,7 @@ register_shutdown_function(function () {
     }
 });
 
-function isUserRole($role)
+function isUserRole()
 {
-    return isset($_SESSION['user']) && $_SESSION['user']->role === $role;
+    return Auth::user()->role;
 }

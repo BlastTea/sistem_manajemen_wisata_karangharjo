@@ -9,13 +9,18 @@ class Transaction extends Model
     protected static $table = 'transactions';
 
     protected $fillable = [
-        'user_id',
+        'visitor_id',
         'discount',
-        'status',
+        'status'
     ];
 
-    public function user()
+    public function visitor()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Visitors::class);
+    }
+
+    public function transactionDetails()
+    {
+        return $this->hasMany(TransactionDetail::class);
     }
 }

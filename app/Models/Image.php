@@ -10,10 +10,11 @@ class Image extends Model
 
     protected $fillable = [
         'tour_package_id',
-        'image_url',
+        'image_url'
     ];
 
-    public function tourPackage() {
+    public function tourPackage()
+    {
         return $this->belongsTo(TourPackage::class);
     }
 }

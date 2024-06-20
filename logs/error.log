@@ -1,0 +1,12 @@
+2024-06-20 04:52:05 - Error: error in add VisitorOrders.php, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'updated_at' in 'field list' in C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Providers\Model.php:144
+Stack trace:
+#0 C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Providers\Model.php(144): PDOStatement->execute()
+#1 C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Http\Controllers\Dashboard\DashboardAdminController\VisitorOrders.php(73): App\Providers\Model->save()
+#2 C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Providers\Route.php(107): App\Http\Controllers\Dashboard\DashboardAdminController\VisitorOrders->add(Object(App\Providers\Request))
+#3 C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Http\Middleware\AdminMiddleware.php(23): App\Providers\Route::App\Providers\{closure}(Object(App\Providers\Request))
+#4 C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Providers\Route.php(89): App\Http\Middleware\AdminMiddleware->handle(Object(App\Providers\Request), Object(Closure))
+#5 C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Http\Middleware\AuthMiddleware.php(16): App\Providers\Route::App\Providers\{closure}(Object(App\Providers\Request))
+#6 C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Providers\Route.php(89): App\Http\Middleware\AuthMiddleware->handle(Object(App\Providers\Request), Object(Closure))
+#7 C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Providers\Route.php(124): App\Providers\Route::App\Providers\{closure}(Array)
+#8 C:\laragon\www\sistem_manajemen_wisata_karangharjo\public\index.php(50): App\Providers\Route::run('/sistem_manajem...')
+#9 {main} in C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Http\Controllers\Dashboard\DashboardAdminController\VisitorOrders.php on line 91

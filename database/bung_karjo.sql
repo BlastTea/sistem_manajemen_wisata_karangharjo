@@ -383,6 +383,35 @@ ALTER TABLE `videos`
   ADD CONSTRAINT `videos_tour_package_id_foreign` FOREIGN KEY (`tour_package_id`) REFERENCES `tour_packages` (`id`);
 COMMIT;
 
+CREATE TABLE `visitors` (
+  `id` int PRIMARY KEY,
+  `visitor_name` varchar(100),
+  `region` varchar(100),
+  `email` varchar(100),
+  `telp` int,
+  `user_id` bigint(20) UNSIGNED,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
+);
+
+ALTER TABLE `transactions`
+  CHANGE COLUMN `admin_id` `visitor_id` bigint(20) UNSIGNED NOT NULL,
+  ADD CONSTRAINT `transactions_visitor_id_foreign` FOREIGN KEY (`visitor_id`) REFERENCES `visitors`(`id`);
+
+
+ALTER TABLE `transaction_details`
+  ADD CONSTRAINT `transaction_details_tour_package_id_foreign` FOREIGN KEY (`tour_package_id`) REFERENCES `tour_packages`(`id`),
+  ADD CONSTRAINT `transaction_details_transaction_id_foreign` FOREIGN KEY (`transaction_id`) REFERENCES `transactions`(`id`);
+
+ALTER TABLE `images`
+  ADD CONSTRAINT `images_tour_package_id_foreign` FOREIGN KEY (`tour_package_id`) REFERENCES `tour_packages`(`id`);
+
+ALTER TABLE `videos`
+  ADD CONSTRAINT `videos_tour_package_id_foreign` FOREIGN KEY (`tour_package_id`) REFERENCES `tour_packages`(`id`);
+
+ALTER TABLE `services`
+  ADD CONSTRAINT `services_tour_package_id_foreign` FOREIGN KEY (`tour_package_id`) REFERENCES `tour_packages`(`id`);
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

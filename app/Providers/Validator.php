@@ -77,18 +77,23 @@ class Validator
                 }
                 break;
             case 'min':
-                if (strlen($value) < $ruleValue) {
-                    $this->errors[$field][] = "The $field must be at least $ruleValue characters.";
+                if (strlen($value) < $ruleValue[0]) {
+                    $this->errors[$field][] = "The $field must be at least $ruleValue[0] characters.";
                 }
                 break;
             case 'max':
-                if (strlen($value) > $ruleValue) {
-                    $this->errors[$field][] = "The $field may not be greater than $ruleValue characters.";
+                if (strlen($value) > $ruleValue[0]) {
+                    $this->errors[$field][] = "The $field may not be greater than $ruleValue[0] characters.";
                 }
                 break;
             case 'integer':
                 if (!filter_var($value, FILTER_VALIDATE_INT)) {
                     $this->errors[$field][] = "The $field must be an integer.";
+                }
+                break;
+            case 'numeric':
+                if (!is_numeric($value)) {
+                    $this->errors[$field][] = "The $field must be a number.";
                 }
                 break;
             case 'string':
@@ -99,6 +104,13 @@ class Validator
             case 'enum':
                 if (!in_array($value, $ruleValue)) {
                     $this->errors[$field][] = "The $field must be one of the following values: " . implode(', ', $ruleValue) . ".";
+                }
+                break;
+            case 'digits_between':
+                $min = $ruleValue[0];
+                $max = $ruleValue[1];
+                if (strlen((string) $value) < $min || strlen((string) $value) > $max) {
+                    $this->errors[$field][] = "The $field must be between $min and $max digits.";
                 }
                 break;
         }

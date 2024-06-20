@@ -6,10 +6,8 @@
     <title>Dashboard | Rumah Pintar Karangharjo</title>
 </head>
 
-<body
-    x-data="{ page: 'ecommerce', loaded: true, darkMode: true, stickyMenu: false, sidebarToggle: false, scrollTop: false, currentRow: null, showEditPopup: false, showDeletePopup: false, paketList: <?php echo htmlspecialchars(json_encode($list_paket), ENT_QUOTES, 'UTF-8');
-    ; ?>, previewImage: ''}"
-    x-init="
+<body x-data="{ page: 'ecommerce', loaded: true, darkMode: true, stickyMenu: false, sidebarToggle: false, scrollTop: false, currentRow: null, showEditPopup: false, showDeletePopup: false, paketList: <?php echo htmlspecialchars(json_encode($list_paket), ENT_QUOTES, 'UTF-8');
+; ?>, previewImage: ''}" x-init="
             darkMode = JSON.parse(localStorage.getItem('darkMode'));
             $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)));
         " :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
@@ -51,7 +49,7 @@
                         </div>
                         <!-- Breadcrumb End -->
 
-                        <?php include view_path('app_admin/partials/modalAddPaket.php'); ?>
+                        <?php include view_path('app_admin/partials/modal-add-package-holidays.php'); ?>
 
                         <!-- Table invoice -->
                         <div class="overflow-x-auto w-screen">
@@ -131,9 +129,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <?php include view_path('app_admin/partials/paketPopup.php') ?>
                     </div>
                 </div>
+                <?php include view_path('app_admin/partials/package-holiday-popup.php') ?>
             </main>
             <!-- ===== Main Content End ===== -->
         </div>

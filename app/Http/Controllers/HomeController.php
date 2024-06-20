@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Providers\Request;
+use App\Providers\Auth;
 
 class HomeController
 {
-    public function show(Request $request)
+    public function show()
     {
         // Set base URL dan range nomor gambar
         $baseUrl = storage_path('images/background/');
@@ -20,6 +20,6 @@ class HomeController
         }
 
         // Passing slider items to view
-        return view('home', ['sliderItems' => $sliderItems]);
+        return view('home', ['sliderItems' => $sliderItems, 'data' => Auth::user()]);
     }
 }

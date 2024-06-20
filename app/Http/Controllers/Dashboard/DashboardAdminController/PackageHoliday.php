@@ -1,24 +1,15 @@
 <?php
+namespace App\Http\Controllers\Dashboard\DashboardAdminController;
 
-namespace App\Http\Controllers;
-
-use DateTime;
-use App\Models\User;
 use App\Models\Image;
-use App\Providers\Auth;
 use App\Providers\Route;
 use App\Providers\Request;
 use App\Models\TourPackage;
 use App\Providers\Validator;
 
-class DashboardAdminController
+class PackageHoliday
 {
-    public function showIndex()
-    {
-        return view('app_admin/dashboard-admin', ['data' => Auth::user()]);
-    }
-
-    public function showPackageHoliday()
+    public function show()
     {
         // Mengambil semua paket tur beserta relasi gambar
         $tourPackages = TourPackage::all();
@@ -41,7 +32,7 @@ class DashboardAdminController
 
             if ($image) {
                 // Sesuaikan path URL sesuai dengan struktur direktori yang benar
-                $packageData['image'] = storage_path('images/background/') . $image->image_url;
+                $packageData['image'] = storage_path($image->image_url);
             } else {
                 $packageData['image'] = ''; // Atau berikan default jika tidak ada gambar
             }
@@ -53,7 +44,7 @@ class DashboardAdminController
         return view('app_admin/holiday-packages', ['list_paket' => $list_paket]);
     }
 
-    public function addPackageHoliday(Request $request)
+    public function add(Request $request)
     {
         // Validasi data
         $validator = Validator::make($request->all(), [
@@ -100,7 +91,7 @@ class DashboardAdminController
     }
 
     // Method untuk menyimpan perubahan dari form edit
-    public function updatePackageHoliday(Request $request, $id)
+    public function update(Request $request, $id)
     {
         try {
             // Validasi input
@@ -153,7 +144,7 @@ class DashboardAdminController
         }
     }
 
-    public function deletePackageHoliday(Request $request)
+    public function delete(Request $request)
     {
         try {
             $id = $request->input('id');
@@ -176,51 +167,5 @@ class DashboardAdminController
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to delete Tour Package. ' . $e->getMessage()], 500);
         }
-    }
-
-    public function showInvoice()
-    {
-        $orders = [
-            ['name' => 'Free Package', 'price' => '$0.00', 'date' => 'Jan 13, 2023', 'status' => 'Paid'],
-            ['name' => 'Basic Package', 'price' => '$19.99', 'date' => 'Feb 20, 2023', 'status' => 'Pending']
-        ];
-        return view('app_admin/visitor-orders', ['orders' => $orders]);
-    }
-
-    public function showCalendarEvents()
-    {
-        // $events = [
-        //     1 => ['Redesign Website', '1 Dec - 2 Dec'],
-        //     25 => ['App Design', '25 Dec - 27 Dec']
-        // ];
-
-        // $calendarData = [];
-        // for ($i = 0; $i < 5; $i++) {
-        //     $week = [];
-        //     for ($j = 1; $j <= 7; $j++) {
-        //         $day = $i * 7 + $j;
-        //         $dayData = ['day' => $day, 'event' => null];
-        //         if (isset($events[$day])) {
-        //             $event = $events[$day];
-        //             $start_date = "$day Dec";
-        //             $width = $this->calculateWidth($start_date, $event[1]);
-        //             $dayData['event'] = ['name' => $event[0], 'date' => $event[1], 'width' => $width];
-        //         }
-        //         $week[] = $dayData;
-        //     }
-        //     $calendarData[] = $week;
-        // }
-
-        // Passing data kalender ke view
-        // return view('app_admin/calender', ['calendarData' => $calendarData]);
-        return view('app_admin/calendar-events');
-    }
-
-    private function calculateWidth($start_date, $end_date)
-    {
-        $start = new DateTime($start_date);
-        $end = new DateTime($end_date);
-        $interval = $start->diff($end);
-        return ($interval->days + 1) * 100;
     }
 }

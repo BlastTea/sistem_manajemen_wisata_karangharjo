@@ -10,7 +10,7 @@ class Service extends Model
 
     protected $fillable = [
         'tour_package_id',
-        'name',
+        'name'
     ];
 
     public function tourPackage()

@@ -10,7 +10,7 @@ class Video extends Model
 
     protected $fillable = [
         'tour_package_id',
-        'video_url',
+        'video_url'
     ];
 
     public function tourPackage()

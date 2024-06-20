@@ -47,7 +47,6 @@
                                 <h2 class="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                                     Sign In to Rumah Pintar
                                 </h2>
-
                                 <form method="post" action="<?php echo base_url('login') ?>">
                                     <div class="mb-4">
                                         <label class="label-form-auth">Email or Username</label>

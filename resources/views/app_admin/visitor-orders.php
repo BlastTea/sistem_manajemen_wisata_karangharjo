@@ -51,7 +51,7 @@
                         </div>
                         <!-- Breadcrumb End -->
 
-                        <?php include view_path('app_admin/partials/modalAddPesanan.php') ?>
+                        <?php include view_path('app_admin/partials/modal-add-transaction.php') ?>
 
                         <!-- Table invoice -->
                         <div x-data="{ showEditPopup: false, showDeletePopup: false, currentRow: null }"
@@ -146,10 +146,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <?php include view_path('app_admin/partials/pesananPopup.php') ?>
                         </div>
                     </div>
                 </div>
+                <?php include view_path('app_admin/partials/orders-popup.php') ?>
             </main>
             <!-- ===== Main Content End ===== -->
         </div>

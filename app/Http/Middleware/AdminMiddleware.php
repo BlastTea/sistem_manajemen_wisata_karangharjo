@@ -16,7 +16,6 @@ class AdminMiddleware implements Middleware
     {
         $user = Auth::user();
         if (!$user || $user->role !== 'admin') {
-            // Log error jika pengguna bukan admin
             $this->logUnauthorizedAccess($user);
             Route::redirect('home');
         }
@@ -27,10 +26,10 @@ class AdminMiddleware implements Middleware
     private function logUnauthorizedAccess($userId)
     {
         try {
-            $message = "Unauthorized access attempt by user ID: $userId";
+            $message = "Unauthorized access attempt by user ID: $userId->id";
             logError(new \Exception($message));
         } catch (Throwable $e) {
-            // Handle error logging failure if necessary
+
         }
     }
 }

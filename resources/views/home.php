@@ -138,6 +138,7 @@
                                 interaktif
                                 hingga workshop kreatif, kami memiliki sesuatu untuk semua orang.</span>
                         </p>
+                        <p> <?= htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') ?></p>
                         <div>
                             <div class="grid grid-cols-1 mt-5 mb-10">
                                 <p><strong class="font-bold">Buka</strong> 08:00 - 17:00</p>
@@ -165,8 +166,6 @@
 
     <!-- Start services Section -->
     <section class="container mx-auto my-8 h-auto">
-        <p>User Sudah login</p>
-        <p>User belom login</p>
         <div class="text-center mb-8 mt-32">
             <h1 class="font-bold text-4xl text-green-600">
                 Layanan Rumah Pintar
