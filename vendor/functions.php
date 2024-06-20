@@ -1,8 +1,9 @@
 <?php
 
-use App\Providers\Auth;
-use App\Providers\Response;
 use Carbon\Carbon;
+use App\Providers\Auth;
+use App\Providers\Route;
+use App\Providers\Response;
 
 function trim_path($path)
 {
@@ -123,4 +124,8 @@ function formatDateTime($datetimeString, $format)
     $dateTime = new DateTime($datetimeString, new DateTimeZone('UTC'));
     $dateTime->setTimezone(new DateTimeZone('Asia/Jakarta'));
     return $dateTime->format($format);
+}
+
+function redirect($url){
+    Route::redirect($url);
 }

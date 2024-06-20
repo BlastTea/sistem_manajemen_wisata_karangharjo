@@ -83,7 +83,7 @@ class PackageHoliday
             $tourPackage->save();
 
 
-            Route::redirect('/dashboard/admin/holiday-packages');
+            redirect('/dashboard/admin/holiday-packages');
 
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to add Tour Package. ' . $e->getMessage()], 500);
@@ -103,7 +103,7 @@ class PackageHoliday
             ]);
 
             if ($validator->fails()) {
-                Route::redirect('dashboard/admin/holiday-packages');
+                redirect('dashboard/admin/holiday-packages');
             }
 
             // Cari paket wisata yang akan diupdate
@@ -135,11 +135,11 @@ class PackageHoliday
             $tourPackage->save();
 
             // Redirect dengan pesan sukses
-            Route::redirect('dashboard/admin/holiday-packages');
+            redirect('dashboard/admin/holiday-packages');
 
         } catch (\Exception $e) {
             // Handle jika terjadi exception
-            Route::redirect('dashboard/admin/holiday-packages');
+            redirect('dashboard/admin/holiday-packages');
             // return redirect()->back()->with('error', 'Failed to update Tour Package. ' . $e->getMessage());
         }
     }

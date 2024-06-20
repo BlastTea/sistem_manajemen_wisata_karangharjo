@@ -18,7 +18,7 @@ class ManagerMiddleware implements Middleware
         if (!$user || $user->role !== 'manager') {
             // Log error jika pengguna bukan admin
             $this->logUnauthorizedAccess($user);
-            Route::redirect('home');
+            redirect('home');
         }
 
         return $next($request);

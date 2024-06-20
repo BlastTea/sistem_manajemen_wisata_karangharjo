@@ -17,7 +17,7 @@ class AdminMiddleware implements Middleware
         $user = Auth::user();
         if (!$user || $user->role !== 'admin') {
             $this->logUnauthorizedAccess($user);
-            Route::redirect('home');
+            redirect('home');
         }
 
         return $next($request);

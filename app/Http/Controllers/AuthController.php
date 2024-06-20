@@ -43,7 +43,7 @@ class AuthController
 
             if (!$user || !Hash::check($password, $user->password)) {
                 // TODO: !$user menjadi 'user tidak ditemukan', dan !Hash::check menjadi 'password salah'
-                Route::redirect('register');
+                redirect('register');
             }
 
             // Login user
@@ -51,11 +51,11 @@ class AuthController
 
             // Redirect based on user role
             if ($user->role === 'admin') {
-                Route::redirect('dashboard/admin');
+                redirect('dashboard/admin');
             } else if ($user->role === 'manager') {
-                Route::redirect('dashboard/manager');
+                redirect('dashboard/manager');
             } else {
-                Route::redirect('home');
+                redirect('home');
             }
 
         } catch (\Exception $e) {
@@ -94,7 +94,7 @@ class AuthController
             Auth::login($user);
 
             // Redirect to home page with a success message
-            Route::redirect('home');
+            redirect('home');
 
         } catch (\Exception $e) {
             // Check if the error is due to duplicate username

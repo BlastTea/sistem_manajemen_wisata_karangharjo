@@ -73,11 +73,72 @@ class VisitorOrders
             $newTransactionDetail->amount_of_people = $request->input('jumlah_tiket');
             $newTransactionDetail->save();
 
-            Route::redirect('dashboard/admin/visitor-orders');
+            redirect('dashboard/admin/visitor-orders');
         } catch (\Exception $e) {
             logError($e);
         }
     }
+
+    public function update(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id_transaction' => 'required|numeric',
+                'visitor-name' => 'required|string|max:50',
+                'number-phone' => 'nullable|string|max:20',
+                'asal-kab' => 'required|string|max:100',
+                'email' => 'nullable|string|email|max:100',
+                'name-paket' => 'required|string|max:100',
+                'jumlah_tiket' => 'required|integer|min:1',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['message' => $validator->errors()], 422);
+            }
+
+            // Cari transaksi berdasarkan id_transaction
+            $transaction = Transaction::find($request->input('id_transaction'));
+
+            if (!$transaction) {
+                return response()->json(['message' => 'Transaction not found'], 404);
+            }
+
+            // Update detail transaksi
+            $packege_id = TourPackage::where('name', '=', $request->input('name-paket'))->first();
+
+            if (!$packege_id) {
+                return response()->json(['message' => 'Package not found'], 404);
+            }
+
+            $transaction->visitor->visitor_name = $request->input('visitor-name');
+            $transaction->visitor->email = $request->input('email');
+            $transaction->visitor->telp = $request->input('number-phone');
+            $transaction->visitor->region = $request->input('asal-kab');
+            $transaction->visitor->save();
+
+            $transaction->discount = 0;
+            $transaction->status = 'invoice';
+            $transaction->save();
+
+            $transactionDetail = TransactionDetails::where('transaction_id', '=', $transaction->id)->first();
+            if (!$transactionDetail) {
+                return response()->json(['message' => 'Transaction detail not found'], 404);
+            }
+
+            $transactionDetail->tour_package_id = $packege_id->id;
+            $transactionDetail->name = $request->input('name-paket');
+            $transactionDetail->price = $packege_id->price;
+            $transactionDetail->amount_of_people = $request->input('jumlah_tiket');
+            $transactionDetail->save();
+
+            // Redirect ke halaman yang sesuai setelah update
+            return redirect('dashboard/admin/visitor-orders');
+        } catch (\Exception $e) {
+            logError($e);
+            return response()->json(['message' => 'Error occurred while updating transaction'], 500);
+        }
+    }
+
 
     private function getDataIndex()
     {
@@ -114,6 +175,7 @@ class VisitorOrders
                 $price = $total_tickets * $tipe_package->price;
 
                 return [
+                    'id_transaction' => $transaction->id,
                     'name' => $visitor->visitor_name,
                     'detail_order' => $detail_order,
                     'price' => 'IDR ' . number_format($price, 2),

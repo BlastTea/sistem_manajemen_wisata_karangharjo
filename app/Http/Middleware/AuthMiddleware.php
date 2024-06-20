@@ -10,7 +10,7 @@ use App\Providers\Route;
 class AuthMiddleware implements Middleware {
     public function handle(Request $request, Closure $next) {
         if (!$request->getSession('user')) {
-            return Route::redirect('login');
+            return redirect('login');
         }
 
         return $next($request);
