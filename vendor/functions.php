@@ -2,6 +2,7 @@
 
 use App\Providers\Auth;
 use App\Providers\Response;
+use Carbon\Carbon;
 
 function trim_path($path)
 {
@@ -25,7 +26,7 @@ function error_path($path = '')
 
 function base_url($path = '')
 {
-    return $_ENV['APP_URL'] . $_ENV['PUBLIC_PATH'] . '/' . trim_path($path);
+    return rtrim($_ENV['APP_URL'] . $_ENV['PUBLIC_PATH'], '/') . '/' . trim_path($path);
 }
 
 function css_path($path = '')
@@ -58,7 +59,12 @@ function view($viewName, $data = [])
 function error($statusCode)
 {
     header("HTTP/1.1 $statusCode");
-    require_once error_path($statusCode) . '.php';
+    $errorFilePath = error_path($statusCode) . '.php';
+    if (file_exists($errorFilePath)) {
+        require_once $errorFilePath;
+    } else {
+        echo "Error $statusCode - File not found";
+    }
 }
 
 function response()
@@ -96,4 +102,25 @@ register_shutdown_function(function () {
 function isUserRole()
 {
     return Auth::user()->role;
+}
+function now()
+{
+    return new DateTime();
+}
+
+function isToday($date)
+{
+    if (!($date instanceof DateTime)) {
+        $date = new DateTime($date);
+    }
+
+    return $date->format('Y-m-d') === now()->format('Y-m-d');
+}
+
+
+function formatDateTime($datetimeString, $format)
+{
+    $dateTime = new DateTime($datetimeString, new DateTimeZone('UTC'));
+    $dateTime->setTimezone(new DateTimeZone('Asia/Jakarta'));
+    return $dateTime->format($format);
 }

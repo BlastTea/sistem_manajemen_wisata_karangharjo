@@ -16,7 +16,7 @@ class TourPackage extends Model
 
     public function transactionDetails()
     {
-        return $this->hasMany(TransactionDetail::class);
+        return $this->hasMany(TransactionDetails::class);
     }
 
     public function images()

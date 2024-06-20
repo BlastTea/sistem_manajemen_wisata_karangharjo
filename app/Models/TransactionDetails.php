@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Providers\Model;
 
-class TransactionDetail extends Model
+class TransactionDetails extends Model
 {
     protected static $table = 'transaction_details';
 

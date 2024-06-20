@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Providers;
 
 use PDO;
@@ -73,7 +72,7 @@ abstract class Model implements \JsonSerializable
 
     protected function getForeignKey()
     {
-        return strtolower(static::class) . '_ide';
+        return strtolower(static::class) . '_id';
     }
 
     protected function getJoinTable($related)
