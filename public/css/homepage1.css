@@ -1,41 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
-
-body {
-  font-family: "Montserrat", sans-serif;
-  color: #fff;
-  overflow-x: hidden;
+/* Section Loader */
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 999999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
-
-.bg-overlay {
-  background: rgba(0, 0, 0, 0.5);
+.dark .loader {
+  --tw-bg-opacity: 1;
+  background-color: rgb(28 36 52 / var(--tw-bg-opacity));
 }
-
-.btn-secondary {
-  @apply bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700;
+.loader-body {
+  height: 4rem;
+  width: 4rem;
 }
-
-.btn-primary {
-  @apply bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700;
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
-
-.outline-icon {
-  @apply border border-gray-300 text-gray-300 hover:border-white hover:text-white;
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
-
-/* Adjust Owl Carousel */
-.owl-carousel .owl-item img {
-  width: 100%;
-  height: auto;
-}
-
-.navbar-transition {
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.bg-dark {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.bg-light {
-  background-color: white;
+.loader-body {
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  border-radius: 9999px;
+  border-width: 4px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgb(60 80 224 / var(--tw-border-opacity));
+  border-top-color: transparent;
 }

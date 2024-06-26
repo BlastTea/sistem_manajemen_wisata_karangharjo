@@ -54,7 +54,15 @@
                         <?php include view_path('app_admin/partials/modal-add-transaction.php') ?>
 
                         <!-- Table invoice -->
-                        <div x-data="{ showEditPopup: false, showDeletePopup: false, currentRow: null }"
+                        <div x-data="{ 
+                                        showEditPopup: false, 
+                                        showDeletePopup: false, 
+                                        currentRow: {}, 
+                                        hargaTiket: 0,
+                                        jumlahTiket: 0,
+                                        tambahTiket() { this.jumlahTiket++; },
+                                        kurangiTiket() { if (this.jumlahTiket > 1) { this.jumlahTiket--; } } 
+                                    }"
                             class="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
                             <div class="max-w-full overflow-x-auto">
                                 <table class="w-full table-auto">
@@ -117,8 +125,12 @@
                                                                     fill="" />
                                                             </svg>
                                                         </button>
-                                                        <button class="hover:text-primary"
-                                                            @click="currentRow = row; showEditPopup = true">
+                                                        <button class="hover:text-primary" @click="
+                                                            currentRow = row; 
+                                                            showEditPopup = true;
+                                                            hargaTiket = row.order_price;
+                                                            jumlahTiket = row.total_tiket;
+                                                            ">
                                                             <!-- Icon untuk edit -->
                                                             <svg class="fill-current text-blue-500" width="18"
                                                                 height="18" viewBox="0 0 20 20" fill="none"
@@ -146,10 +158,10 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <?php include view_path('app_admin/partials/orders-popup.php') ?>
                         </div>
                     </div>
                 </div>
-                <?php include view_path('app_admin/partials/orders-popup.php') ?>
             </main>
             <!-- ===== Main Content End ===== -->
         </div>

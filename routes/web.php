@@ -24,6 +24,7 @@ Route::post('dashboard/admin/visitor-orders/create', 'Dashboard\DashboardAdminCo
 
 // update route
 Route::post('dashboard/admin/package-holidays/update', 'Dashboard\DashboardAdminController\PackageHoliday@update', ['auth', 'admin']);
+Route::post('dashboard/admin/visitor-orders/update', 'Dashboard\DashboardAdminController\VisitorOrders@update', ['auth', 'admin']);
 
 
 // delete route

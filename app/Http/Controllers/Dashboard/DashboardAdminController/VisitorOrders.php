@@ -90,6 +90,7 @@ class VisitorOrders
                 'email' => 'nullable|string|email|max:100',
                 'name-paket' => 'required|string|max:100',
                 'jumlah_tiket' => 'required|integer|min:1',
+                // 'status' => 'required|numeric'
             ]);
 
             if ($validator->fails()) {
@@ -103,6 +104,23 @@ class VisitorOrders
                 return response()->json(['message' => 'Transaction not found'], 404);
             }
 
+            // Cari Visitor berdasarkan id_transaction
+            $visitor = Visitors::find($transaction->visitor_id);
+
+            if (!$visitor) {
+                return response()->json(['message' => 'Visitor not found'], 404);
+            }
+
+            $visitor->visitor_name = $request->input('visitor-name');
+            $visitor->email = $request->input('email');
+            $visitor->telp = $request->input('number-phone');
+            $visitor->region = $request->input('asal-kab');
+            if (Auth::user()) {
+                $visitor->user_id = Auth::user()->id;
+            }
+            $visitor->save();
+
+
             // Update detail transaksi
             $packege_id = TourPackage::where('name', '=', $request->input('name-paket'))->first();
 
@@ -110,14 +128,9 @@ class VisitorOrders
                 return response()->json(['message' => 'Package not found'], 404);
             }
 
-            $transaction->visitor->visitor_name = $request->input('visitor-name');
-            $transaction->visitor->email = $request->input('email');
-            $transaction->visitor->telp = $request->input('number-phone');
-            $transaction->visitor->region = $request->input('asal-kab');
-            $transaction->visitor->save();
-
             $transaction->discount = 0;
-            $transaction->status = 'invoice';
+            // $transaction->status = $request->input('status');
+            $transaction->status = 'paid';
             $transaction->save();
 
             $transactionDetail = TransactionDetails::where('transaction_id', '=', $transaction->id)->first();
@@ -126,7 +139,7 @@ class VisitorOrders
             }
 
             $transactionDetail->tour_package_id = $packege_id->id;
-            $transactionDetail->name = $request->input('name-paket');
+            $transactionDetail->name = 'Pembelian Offline';
             $transactionDetail->price = $packege_id->price;
             $transactionDetail->amount_of_people = $request->input('jumlah_tiket');
             $transactionDetail->save();
@@ -136,6 +149,31 @@ class VisitorOrders
         } catch (\Exception $e) {
             logError($e);
             return response()->json(['message' => 'Error occurred while updating transaction'], 500);
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id_transaction' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 422);
+        }
+
+        // Cari transaksi berdasarkan id_transaction
+        $transaction = Transaction::find($request->input('id_transaction'));
+
+        if (!$transaction) {
+            return response()->json(['message' => 'Transaction not found'], 404);
+        }
+
+        // Cari Visitor berdasarkan id_transaction
+        $visitor = Visitors::find($transaction->visitor_id);
+
+        if (!$visitor) {
+            return response()->json(['message' => 'Visitor not found'], 404);
         }
     }
 
@@ -177,10 +215,15 @@ class VisitorOrders
                 return [
                     'id_transaction' => $transaction->id,
                     'name' => $visitor->visitor_name,
-                    'detail_order' => $detail_order,
                     'price' => 'IDR ' . number_format($price, 2),
                     'date' => isToday($transaction->created_at) ? formatDateTime($transaction->created_at, 'H:i') : formatDateTime($transaction->created_at, 'M d, Y'),
-                    'status' => $transaction->status
+                    'status' => $transaction->status,
+                    'no_telp' => $visitor->telp,
+                    'email' => $visitor->email,
+                    'region' => $visitor->region,
+                    'total_tiket' => $total_tickets,
+                    'tipe_paket' => $tipe_package->name,
+                    'order_price' => $tipe_package->price,
                 ];
             }, $transactions);
 

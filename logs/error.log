@@ -1,1 +1,1 @@
-2024-06-20 15:02:06 - Error: strlen(): Passing null to parameter #1 ($string) of type string is deprecated in C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Providers\Validator.php on line 85
+2024-06-22 14:27:14 - Error: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'visitor_name' cannot be null in C:\laragon\www\sistem_manajemen_wisata_karangharjo\app\Providers\Model.php on line 143
