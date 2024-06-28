@@ -3,7 +3,7 @@
     @click.outside="sidebarToggle = false">
     <!-- SIDEBAR HEADER -->
     <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <a href="<?php echo base_url('dashboard/' . isUserRole()) ?>" class="flex space-x-3 items-center">
+        <a href="<?php echo base_url('dashboard-' . isUserRole()) ?>" class="flex space-x-3 items-center">
             <img src="<?= storage_path('images/logo/logo.png') ?>" alt="Logo" class="w-14 h-14 rounded-lg" />
             <h3 class="mb-4 text-xl font-bold text-bodydark2 my-auto">Rumah Pintar</h3>
         </a>
@@ -29,7 +29,7 @@
                 <ul class="mb-6 flex flex-col gap-1.5">
                     <!-- Menu Item Dashboard -->
                     <li>
-                        <a class="group items-sidebar" href="<?php echo base_url('dashboard/' . isUserRole()) ?>"
+                        <a class="group items-sidebar" href="<?php echo base_url('dashboard-' . isUserRole()) ?>"
                             @click="selected = (selected === 'Dashboard' ? '':'Dashboard')"
                             :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Dashboard') && (page === 'Dashboard') }">
                             <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -56,7 +56,7 @@
                     <!-- Menu Item Calendar -->
                     <li>
                         <a class="group items-sidebar"
-                            href="<?php echo base_url('dashboard/' . isUserRole() . '/calendar-events') ?>"
+                            href="<?php echo base_url('dashboard-' . isUserRole() . '-calendar-events') ?>"
                             @click="selected = (selected === 'Calendar' ? '':'Calendar')"
                             :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Calendar') && (page === 'calendar') }">
                             <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -112,12 +112,12 @@
                             <ul class="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                                 <li>
                                     <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                        href="<?php echo base_url('dashboard/' . isUserRole() . '/visitor-orders') ?>"
+                                        href="<?php echo base_url('dashboard-' . isUserRole() . '-visitor-orders') ?>"
                                         :class="page === 'VisitorsPackage' && '!text-white'">Pesanan Pelanggan</a>
                                 </li>
                                 <li>
                                     <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                        href="<?php echo base_url('dashboard/' . isUserRole() . '/holidays-package') ?>"
+                                        href="<?php echo base_url('dashboard-' . isUserRole() . '-holidays-package') ?>"
                                         :class="page === 'HolidaysPackages' && '!text-white'">Paket Wisata</a>
                                 </li>
                             </ul>
@@ -128,7 +128,7 @@
                     <!-- Menu Item Profile -->
                     <li>
                         <a class="group items-sidebar"
-                            href="<?php echo base_url('dashboard/' . isUserRole() . '/profile') ?>"
+                            href="<?php echo base_url('dashboard-' . isUserRole() . '-profile') ?>"
                             @click="selected = (selected === 'Profile' ? '':'Profile')"
                             :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Profile') && (page === 'profile') }"
                             :class="page === 'profile' && 'bg-graydark'">
