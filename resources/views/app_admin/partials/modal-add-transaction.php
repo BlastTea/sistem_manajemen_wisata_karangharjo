@@ -21,7 +21,7 @@
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100"
         x-transition:leave-end="opacity-0 transform scale-90" class="modal-style">
         <div class="relative bg-white dark:bg-boxdark p-8 rounded-lg shadow-lg w-10/12">
-            <form method="post" action="<?php echo base_url('dashboard/admin/visitor-orders/create') ?>">
+            <form method="post" action="<?php echo base_url('dashboard-admin-visitor-orders-create') ?>">
                 <div x-show="step === 1" class="h-80">
                     <!-- Isi Modal -->
                     <h2 class="text-2xl font-semibold text-boxdark dark:text-gray-2 mb-6">Tambah Pesanan Tiket</h2>

@@ -51,7 +51,7 @@ class AuthController
 
             // Redirect based on user role
             if ($user->role === 'admin') {
-                redirect('dashboard/admin');
+                redirect('dashboard-admin');
             } else if ($user->role === 'manager') {
                 redirect('dashboard/manager');
             } else {

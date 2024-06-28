@@ -73,7 +73,7 @@ class VisitorOrders
             $newTransactionDetail->amount_of_people = $request->input('jumlah_tiket');
             $newTransactionDetail->save();
 
-            redirect('dashboard/admin/visitor-orders');
+            redirect('dashboard-admin-visitor-orders');
         } catch (\Exception $e) {
             logError($e);
         }
@@ -132,7 +132,7 @@ class VisitorOrders
             $transactionDetail->save();
 
             // Redirect ke halaman yang sesuai setelah update
-            return redirect('dashboard/admin/visitor-orders');
+            return redirect('dashboard-admin-visitor-orders');
         } catch (\Exception $e) {
             logError($e);
             return response()->json(['message' => 'Error occurred while updating transaction'], 500);
