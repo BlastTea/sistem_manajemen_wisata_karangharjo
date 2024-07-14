@@ -1,413 +1,118 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' || false }"
+    x-init="$watch('darkMode', (value) => { localStorage.setItem('darkMode', value) })" :class="{ 'dark': darkMode }">
 
 <head>
     <meta charset="UTF-8">
-    <title>Wisata Desa Karangharjo | Homepage</title>
+    <title>Wisata Desa Karangharjo Jember - Pesona Alam & Edukasi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= css_path('homepage.css') ?>">
-    <link rel="stylesheet" href="<?= css_path('homepage1.css') ?>">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="favicon.ico">
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <!-- SEO -->
+    <meta name="description"
+        content="Jelajahi keindahan alam dan wisata edukasi di Desa Karangharjo, Jember. Temukan pesona alam, budaya lokal, dan destinasi wisata menarik lainnya.">
+    <meta name="keywords"
+        content="wisata karangharjo, wisata jember, wisata alam, wisata edukasi, desa wisata, tempat wisata, objek wisata, karangharjo jember, jember, indonesia">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Open Graph Protocol -->
+    <meta property="og:title" content="Wisata Desa Karangharjo Jember - Pesona Alam & Edukasi" />
+    <meta property="og:description"
+        content="Jelajahi keindahan alam dan wisata edukasi di Desa Karangharjo, Jember. Temukan pesona alam, budaya lokal, dan destinasi wisata menarik lainnya." />
+    <meta property="og:image" content="https://www.contohwebsite.com/gambar-menarik.jpg" />
+    <meta property="og:url" content="https://www.contohwebsite.com/" />
 
-    <!-- Style -->
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
-
-        body {
-            font-family: "Montserrat", sans-serif;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        .bg-overlay {
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .btn-secondary {
-            @apply bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700;
-        }
-
-        .btn-primary {
-            @apply bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700;
-        }
-
-        .outline-icon {
-            @apply border border-gray-300 text-gray-300 hover:border-white hover:text-white;
-        }
-
-        /* Adjust Owl Carousel */
-        .owl-carousel .owl-item img {
-            width: 100%;
-            height: auto;
-        }
-
-        .navbar-transition {
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .bg-dark {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .bg-light {
-            background-color: white;
-        }
-    </style>
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/accounting/accounting.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            const main_slider = $("#main-slider");
-            main_slider.owlCarousel({
-                rtl: false,
-                loop: true,
-                nav: false,
-                dots: false,
-                autoplay: true,
-                autoplayTimeout: 5000, // Durasi slide
-                autoplaySpeed: 1000, // Kecepatan transisi otomatis
-                smartSpeed: 1000, // Kecepatan transisi manual
-                autoplayHoverPause: false,
-                responsive: {
-                    0: {
-                        items: 1
-                    }
-                }
-            });
-        });
-    </script>
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wisata Desa Karangharjo Jember - Pesona Alam & Edukasi">
+    <meta name="twitter:description"
+        content="Jelajahi keindahan alam dan wisata edukasi di Desa Karangharjo, Jember. Temukan pesona alam, budaya lokal, dan destinasi wisata menarik lainnya.">
+    <meta name="twitter:image" content="https://www.contohwebsite.com/gambar-menarik.jpg">
 </head>
 
-<body x-data="{ loading: true }" x-init="window.onload = () => loading = false" :class="{ 'overflow-hidden': loading }">
+<body x-data="{ loading:true, isDarkmode:false }" x-init="window.onload = () => loading = false"
+    :class="{ 'overflow-hidden': loading}" class="antialiased bg-base-light dark:bg-base-dark">
     <!-- Elemen Loading -->
     <div x-show="loading" class="loader">
         <div class="loader-body"></div>
     </div>
-    <nav class="fixed top-0 left-0 right-0 z-50 transition navbar navbar-transition bg-dark bg-opacity-10">
-        <div class="navbar-start">
-            <div class="dropdown">
-                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h8m-8 6h16" />
-                    </svg>
+
+    <!-- Navbar Start -->
+    <header x-data="{ navbarOpen: true, mobileMenuOpen:true, lastScrollY: 0 }"
+        x-init="()=>{window.addEventListener('scroll',()=>{navbarOpen=window.scrollY<=lastScrollY;lastScrollY=window.scrollY;})}"
+        :class="{ 'transform translate-y-0 opacity-100': navbarOpen, 'transform -translate-y-full opacity-0': !navbarOpen }"
+        class="fixed top-0 left-0 right-0 z-50 flex flex-col justify-between bg-opacity-100 navbar-transition">
+
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center justify-between py-3 text-primary dark:text-base-light">
+                <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+                    <a href="#" class="text-xl font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap ">
+                        Rumah Pintar
+                    </a>
+                    <button @click="mobileMenuOpen = !mobileMenuOpen"
+                        class=" cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+                        type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-180" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </button>
                 </div>
-                <ul tabindex="0"
-                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-700 rounded-box w-52 font-medium">
-                    <li><a>Home</a></li>
-                    <li><a>Services</a></li>
-                    <li><a>Ticket</a></li>
-                    <li><a>About Us</a></li>
-                    <a href="<?php echo base_url('login') ?>" class="btn btn-info">login</a>
-                </ul>
-            </div>
-            <a class="text-xl btn btn-ghost">Rumah Pintar</a>
-        </div>
-        <div class="hidden navbar-end lg:flex">
-            <ul class="px-1 menu menu-horizontal font-medium">
-                <li><a>Home</a></li>
-                <li><a>Services</a></li>
-                <li><a>Ticket</a></li>
-                <li><a>About Us</a></li>
-            </ul>
-            <a href="<?php echo base_url('login') ?>" class="btn btn-info">login</a>
-        </div>
-    </nav>
-
-    <main x-show="!loading" x-transition:enter="transition-opacity duration-2000" x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100">
-        <!-- Start Hero Content -->
-        <section>
-            <div class="absolute z-30">
-                <div class="grid h-screen grid-cols-1 px-3 pt-95 bg-overlay lg:grid-cols-2 md:px-4 lg:px-8">
-                    <div class="flex flex-col gap-5 text-white md:gap-8">
-                        <div class="flex flex-col gap-4 mt-72">
-                            <h2 class="text-xl font-semibold md:text-3xl lg:text-4xl">Selamat Datang di Rumah Pintar
-                                Karangharjo, Jember</h2>
-                            <p>
-                                Kami dengan senang hati menyambut Anda di Rumah Pintar
-                                Karangharjo, destinasi wisata edukasi yang menawarkan pengalaman unik dan menarik di
-                                Jember.
-                                <span class="hidden lg:block"> Temukan berbagai kegiatan
-                                    yang menginspirasi, edukatif, dan menyenangkan bagi seluruh keluarga. Dari pameran
-                                    interaktif
-                                    hingga workshop kreatif, kami memiliki sesuatu untuk semua orang.</span>
-                            </p>
-                            <p> <?= htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8') ?></p>
-                            <div>
-                                <div class="grid grid-cols-1 mt-5 mb-10">
-                                    <p><strong class="font-bold">Buka</strong> 08:00 - 17:00</p>
-                                    <p><strong class="font-bold">Lokasi:</strong> Desa Karangharjo, Jember</p>
-                                </div>
-                                <div class="flex gap-3 md:ml-auto">
-                                    <a href="javascript:void(0)" class="btn btn-secondary">Lihat Aktivitas <i
-                                            class="pl-2 fas fa-play"></i></a>
-                                    <button class="btn btn-primary">Pesan Paket <i
-                                            class="pl-2 fas fa-plus"></i></button>
-                                    <button
-                                        class="flex items-center justify-center w-10 h-10 border border-gray-300 rounded-full outline-icon">
-                                        <i class="fas fa-share-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="main-slider" class="relative z-0 owl-carousel owl-theme bg-cover">
-                <?= $sliderItems ?>
-            </div>
-        </section>
-        <!-- End Content -->
-
-        <!-- Start services Section -->
-        <section class="container mx-auto my-8 h-auto">
-            <div class="text-center mb-8 mt-32">
-                <h1 class="font-bold text-4xl text-green-600">
-                    Layanan Rumah Pintar
-                </h1>
-                <p class="text-lg text-gray-500">Mengenal Alam dan Budaya dengan Cara yang Menyenangkan</p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5 md:p-10 lg:p-20 text-black">
-                <!-- Card 1 -->
-                <div class="card w-full border border-gray-400 bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <div class="text-6xl text-green-600 mb-4">
-                            <i class="fas fa-tree"></i>
-                        </div>
-                        <h2 class="card-title text-2xl font-semibold">Petualangan Hutan</h2>
-                        <p class="text-gray-600">Ajari anak-anak tentang ekosistem hutan dan keanekaragaman hayati
-                            dengan
-                            pengalaman langsung di alam.</p>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="card w-full border border-gray-400 bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <div class="text-6xl text-green-600 mb-4">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <h2 class="card-title text-2xl font-semibold">Pembelajaran Pertanian</h2>
-                        <p class="text-gray-600">Kenalkan anak-anak pada dunia pertanian dan cara bercocok tanam, dari
-                            menanam biji hingga panen.</p>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="card w-full border border-gray-400 bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <div class="text-6xl text-green-600 mb-4">
-                            <i class="fas fa-globe"></i>
-                        </div>
-                        <h2 class="card-title text-2xl font-semibold">Eksplorasi Budaya</h2>
-                        <p class="text-gray-600">Perkenalkan anak-anak pada berbagai budaya dan tradisi melalui
-                            aktivitas
-                            interaktif dan edukatif.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Section -->
-
-        <!-- Start Paket Section -->
-        <section class="container mx-auto my-8 h-screen" x-data="{ 
-                open: false,
-                paket: '',
-                masaBerlaku: '',
-                hargaTiket: 0,
-                jumlahTiket: 1,
-                tambahTiket: function() {
-                    this.jumlahTiket++;
-                },
-                kurangiTiket: function() {
-                    if (this.jumlahTiket > 1) {
-                        this.jumlahTiket--;
-                    }
-                }
-            }" @click.away="open = false">
-            <div class="text-center mb-8 mt-32">
-                <h1 class="font-bold text-4xl text-green-600">
-                    Paket Liburan Rumah Pintar
-                </h1>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5 lg:p-10 text-black">
-
-                <!-- Card 1 -->
-                <a href="javascript:void(0)"
-                    @click="open = true; paket = 'Paket Agrowisata'; masaBerlaku = '13 Jun 2024'; hargaTiket = 10000">
-                    <div class="card card-compact w-full h-full bg-base-100 shadow-xl">
-                        <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                                alt="Shoes" /></figure>
-                        <div class="badge badge-warning text-sm py-2 text-white rounded-sm w-full">100% Refund tersedia
-                        </div>
-                        <div class="card-body">
-                            <h2 class="card-title">Paket Agrowisata</h2>
-                            <div class="badge badge-success text-sm py-2 text-white rounded-md">Diskon 20%</div>
-                            <p class="hidden lg:block">Explore the great outdoors and save 20% with our Agrotourism
-                                Package.
-                                Enjoy the freedom with
-                                our 100% refund guarantee.</p>
-                            <div class="card-actions justify-end">
-                                <h1 class="font-semibold text-gray-700 p-5 text-lg">IDR 10.000</h1>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Card 2 -->
-                <a href="javascript:void(0)"
-                    @click="open = true; paket = 'Paket Outbond'; masaBerlaku = '14 Jun 2024'; hargaTiket = 15000">
-                    <div class="card card-compact w-full h-full bg-base-100 shadow-xl">
-                        <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                                alt="Shoes" /></figure>
-                        <div class="badge badge-warning text-sm py-2 text-white rounded-sm w-full">100% Refund tersedia
-                        </div>
-                        <div class="card-body">
-                            <h2 class="card-title">Paket Outbond</h2>
-                            <div class="badge badge-success text-sm py-2 text-white rounded-md">Diskon 20%</div>
-                            <p class="hidden lg:block">Embark on thrilling adventures with our Outbound Package. Avail
-                                of a
-                                20% discount and enjoy
-                                peace of mind with our 100% refund guarantee.</p>
-                            <div class="card-actions justify-end">
-                                <h1 class="font-semibold text-gray-700 p-5 text-lg">IDR 10.000</h1>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Card 3 -->
-                <a href="javascript:void(0)"
-                    @click="open = true; paket = 'Paket Permainan Tradisional'; masaBerlaku = '15 Jun 2024'; hargaTiket = 20000">
-                    <div class="card card-compact w-full h-full bg-base-100 shadow-xl">
-
-                        <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                                alt="Shoes" /></figure>
-                        <div class="badge badge-warning text-sm py-2 text-white rounded-sm w-full">100% Refund tersedia
-                        </div>
-                        <div class="card-body">
-                            <h2 class="card-title">Paket Permainan Tradisional</h2>
-                            <div class="badge badge-success text-sm py-2 text-white rounded-md">Diskon 20%</div>
-                            <p class="hidden lg:block">Experience traditional joy with our Traditional Games Package.
-                                Enjoy
-                                a 20% discount and
-                                ensure satisfaction with our 100% refund guarantee.</p>
-                            <div class="card-actions justify-end">
-                                <h1 class="font-semibold text-gray-700 p-5 text-lg">IDR 10.000</h1>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Popup Container -->
-            <div x-show="open" x-transition:enter="transition-transform transition-opacity ease-out duration-300"
-                x-transition:enter-start="opacity-0 transform translate-y-full"
-                x-transition:enter-end="opacity-100 transform translate-y-0"
-                x-transition:leave="transition ease-in duration-300" x-transition:leave-end="opacity-0"
-                class="fixed inset-0 flex items-end justify-center bg-black bg-opacity-50 z-50">
-                <div class="bg-white p-6 rounded-lg shadow-lg m-2 lg:max-w-2xl w-full">
-                    <!-- Close Button -->
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-lg font-semibold">Detail Pesanan</h2>
-                        <button @click="open = false" class="text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Content -->
-                    <div>
-                        <!-- Form -->
-                        <form method="post" action="proses.php" class="text-gray-700 font-sans">
-                            <!-- Paket Terpilih -->
-                            <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                                <h3 class="font-semibold mb-1">Paket Terpilih</h3>
-                                <p class="text-gray-700" x-text="paket"></p>
-                                <p class="text-gray-500" x-text="'Masa Berlaku: ' + masaBerlaku"></p>
-                                <p class="text-yellow-600 text-sm mt-2">Bisa 100% Refund dengan asuransi</p>
-                            </div>
-
-                            <!-- Tanggal Kunjungan -->
-                            <div class="mb-4" x-data="{ tanggalKunjungan: 'sekarang' }">
-                                <h3 class="font-semibold mb-2">Tanggal Kunjungan</h3>
-                                <div class="grid grid-cols-2 gap-3 space-x-2 mb-2">
-                                    <label
-                                        :class="{ 'bg-blue-200 text-blue-700 px-3 py-2 rounded-lg cursor-pointer': tanggalKunjungan === 'sekarang', 'bg-gray-200 text-gray-700 px-3 py-2 rounded-lg cursor-pointer': tanggalKunjungan !== 'sekarang' }">
-                                        <input type="radio" x-model="tanggalKunjungan" value="sekarang" class="hidden"
-                                            name="tanggal_kunjungan">
-                                        Sekarang<br>12 Jun
-                                    </label>
-                                    <label
-                                        :class="{ 'bg-blue-200 text-blue-700 px-3 py-2 rounded-lg cursor-pointer': tanggalKunjungan === 'besok', 'bg-gray-200 text-gray-700 px-3 py-2 rounded-lg cursor-pointer': tanggalKunjungan !== 'besok' }">
-                                        <input type="radio" x-model="tanggalKunjungan" value="besok" class="hidden"
-                                            name="tanggal_kunjungan">
-                                        Besok<br>13 Jun
-                                    </label>
-                                </div>
-                                <label class="mt-8 font-medium cursor-pointer">
-                                    <input type="radio" x-model="tanggalKunjungan" value="pilih" class="sr-only"
-                                        name="tanggal_kunjungan">
-                                    <p class="text-blue-600 underline">Pilih Tanggal saja</p>
-                                </label>
-                                <input type="date" x-show="tanggalKunjungan === 'pilih'"
-                                    class="bg-gray-100 px-3 col-span-2 py-5 rounded-lg w-full"
-                                    name="tanggal_kunjungan_pilih">
-                            </div>
-
-                            <!-- Jumlah Tiket -->
-                            <div class="mb-4 mt-8">
-                                <h3 class="font-semibold mb-2">Jumlah Tiket</h3>
-                                <div class="flex items-center">
-                                    <p class="font-semibold text-green-600 text-lg"
-                                        x-text="'IDR ' + accounting.formatMoney(hargaTiket, '', 0, ',', '.') + '/pax'">
-                                    </p>
-                                    <div class="flex items-center ml-auto">
-                                        <span @click="kurangiTiket" role="button"
-                                            class="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg">-</span>
-                                        <input type="text" x-model="jumlahTiket"
-                                            class="w-12 text-center mx-2 bg-gray-100 rounded-lg" name="jumlah_tiket">
-                                        <span @click="tambahTiket" role="button"
-                                            class="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg">+</span>
+                <nav :class="{'flex': mobileMenuOpen, 'hidden': !mobileMenuOpen}"
+                    class="lg:flex flex-grow items-center max-w-full justify-center transition-all duration-500 lg:transition-none capitalize"
+                    id="collapse-navbar">
+                    <ul class="flex flex-col items-center font-sans mt-2 lg:space-x-4 lg:flex-row list-none lg:ml-auto">
+                        <li class="nav-item">
+                            <a class="px-3 py-2 flex items-center text-sm leading-snug hover:opacity-75" href="#home">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="px-3 py-2 flex items-center text-sm leading-snug hover:opacity-75"
+                                href="#services">
+                                services
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="px-3 py-2 flex items-center text-sm leading-snug hover:opacity-75" href="#ticket">
+                                ticket
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="px-3 py-2 flex items-center text-sm leading-snug hover:opacity-75" href="#about">
+                                About Us
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="flex items-center">
+                                <button x-on:click="darkMode = !darkMode"
+                                    class="w-12 h-6 rounded-full bg-white flex items-center p-1 transition duration-300 focus:outline-none shadow"
+                                    onclick="toggleTheme()">
+                                    <div id="switch-toggle"
+                                        class="w-6 h-6 rounded-full transition duration-500 transform bg-yellow-500 -translate-x-2 flex items-center justify-center text-white">
                                     </div>
-                                </div>
+                                </button>
                             </div>
-
-                            <!-- Total -->
-                            <div class="flex justify-end items-center mb-4">
-                                <p class="font-semibold text-lg"
-                                    x-text="'Total (' + jumlahTiket + ' pax): ' + 'IDR ' + accounting.formatMoney(hargaTiket * jumlahTiket, '', 0, ',', '.')">
-                                </p>
-                            </div>
-
-                            <!-- Pesan Button -->
-                            <button type="submit"
-                                class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">Pesan</button>
-                        </form>
-
-                    </div>
-
-                </div>
+                        </li>
+                    </ul>
+                </nav>
             </div>
+        </div>
+    </header>
+    <!-- Navbar End -->
+
+    <main x-show="!loading" x-transition:enter="transition-opacity duration-2000" x-transition:enter-start="opacity-0">
+        <!-- Hero Start  -->
+        <section class="h-screen flex items-center">
         </section>
-        <!-- End Section -->
+        <section class="h-screen flex items-center">
+        </section>
+        <!-- Hero End -->
     </main>
+
 
 
     <!-- Start footer Section -->
@@ -415,8 +120,45 @@
     </footer>
     <!-- End Section -->
 
-    <!-- Include FontAwesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Script Modul -->
+    <script type="Modul" src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
+    <script type="" defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+    <!-- <script src="<?= js_path("homepage/index.js") ?>"></script> -->
+    <script>
+        const switchToggle = document.querySelector('#switch-toggle');
+        let isDarkmode = false
+
+        const darkIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>`
+
+        const lightIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>`
+
+        function toggleTheme() {
+            isDarkmode = !isDarkmode
+            localStorage.setItem('isDarkmode', isDarkmode)
+            switchTheme()
+        }
+
+        function switchTheme() {
+            if (isDarkmode) {
+                switchToggle.classList.remove('bg-yellow-500', '-translate-x-4')
+                switchToggle.classList.add('bg-gray-700', 'translate-x-6')
+                setTimeout(() => {
+                    switchToggle.innerHTML = darkIcon
+                }, 250);
+            } else {
+                switchToggle.classList.add('bg-yellow-500', '-translate-x-4')
+                switchToggle.classList.remove('bg-gray-700', 'translate-x-6')
+                setTimeout(() => {
+                    switchToggle.innerHTML = lightIcon
+                }, 250);
+            }
+        }
+        switchTheme()
+    </script>
 </body>
 
 </html>
